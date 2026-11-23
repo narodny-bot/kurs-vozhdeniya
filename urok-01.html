@@ -258,11 +258,29 @@ details.block,h2,h3,#quiz-h,#lamps,#stepper,#quiz{scroll-margin-top:12px}
   .lamp-table tr.row-blue td:nth-child(2){display:flex;align-items:center;gap:.5rem}
 }
 
+
+.lesson-nav{
+  display:flex;justify-content:space-between;align-items:center;gap:.75rem;
+  margin:.2rem 0 1rem;font-weight:700;
+}
+.lesson-nav a{
+  color:var(--navy);text-decoration:none;background:#fff;
+  border-radius:999px;padding:.4rem .85rem;box-shadow:var(--shadow);font-size:.92rem
+}
+.lesson-nav a:hover{color:var(--blue)}
+.lesson-nav .spacer{flex:1}
+footer.site a{color:var(--blue);text-decoration:none}
+
 </style>
 </head>
 <body>
 <div class="progress" aria-hidden="true"><span id="bar"></span></div>
 <div class="wrap">
+<nav class="lesson-nav" aria-label="Уроки">
+  <a href="index.html">Все уроки</a>
+  <span class="spacer"></span>
+  <a href="urok-02.html">Урок 2 →</a>
+</nav>
 <header class="hero">
   <p class="kicker">Теоретический курс · Урок 1</p>
   <h1>Знакомство с машиной и первое трогание</h1>
@@ -721,7 +739,7 @@ details.block,h2,h3,#quiz-h,#lamps,#stepper,#quiz{scroll-margin-top:12px}
 </div>
 </details>
 
-<footer class="site">Урок 1 · учебный Ford Focus 2, 1.6, механика</footer>
+<footer class="site">Урок 1 · учебный Ford Focus 2, 1.6, механика · <a href="urok-02.html">Урок 2 →</a> · <a href="index.html">Все уроки</a></footer>
 </div>
 <script>
 

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Теория к занятию 2: торможение, движение назад и диагональная парковка на учебном Ford Focus 2.">
+<title>Урок 2. Торможение, движение назад и диагональная парковка</title>
+<style>
+
+:root{
+  --navy:#1B365D;
+  --navy-2:#2C5282;
+  --blue:#2B6CB0;
+  --blue-soft:#EBF4FF;
+  --ink:#1A202C;
+  --muted:#4A5568;
+  --bg:#F6F3EE;
+  --card:#FFFFFF;
+  --line:#E2E8F0;
+  --green:#276749;
+  --green-bg:#F0FFF4;
+  --red:#9B2C2C;
+  --red-bg:#FFF5F5;
+  --yellow:#975A16;
+  --yellow-bg:#FFFFF0;
+  --gold:#C05621;
+  --radius:16px;
+  --shadow:0 8px 24px rgba(27,54,93,.08);
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--font);
+  font-size:17px;
+  line-height:1.55;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-text-size-adjust:100%;
+}
+img{max-width:100%;height:auto;display:block}
+button,input{font:inherit}
+.progress{
+  position:fixed;top:0;left:0;right:0;height:5px;background:#E2E8F0;z-index:50;
+}
+.progress span{
+  display:block;height:100%;width:0;background:linear-gradient(90deg,#2B6CB0,#1B365D);
+  transition:width .15s linear;
+}
+.wrap{max-width:42rem;margin:0 auto;padding:1.1rem 1rem 3.5rem}
+header.hero{
+  background:linear-gradient(160deg,#1B365D 0%,#2C5282 70%);
+  color:#fff;
+  padding:1.35rem 1rem 1.5rem;
+  border-radius:0 0 22px 22px;
+  box-shadow:var(--shadow);
+  margin:5px -1rem 1.25rem;
+}
+@media(min-width:42rem){
+  header.hero{margin:5px 0 1.25rem;border-radius:22px}
+}
+.kicker{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85;margin:0 0 .35rem;font-weight:700}
+header.hero h1{font-size:1.7rem;line-height:1.2;margin:0 0 .55rem;letter-spacing:-.02em}
+.meta{font-size:.95rem;opacity:.92;margin:.15rem 0}
+.badge-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem}
+.badge{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);padding:.25rem .6rem;border-radius:999px;font-size:.8rem}
+h2{font-size:1.35rem;line-height:1.25;color:var(--navy);margin:2rem 0 .7rem;padding-bottom:.35rem;border-bottom:2px solid #2C5282}
+h3{font-size:1.12rem;color:var(--navy-2);margin:1.4rem 0 .45rem}
+p{margin:.55rem 0}
+strong{font-weight:700}
+ol,ul{margin:.45rem 0 .8rem;padding-left:1.25rem}
+li{margin:.28rem 0}
+ol{padding-left:1.4rem}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:1rem 1rem 1.05rem;
+  box-shadow:var(--shadow);
+  margin:1rem 0;
+}
+details.block{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  margin:1rem 0;
+  overflow:hidden;
+}
+details.block>summary{
+  cursor:pointer;
+  list-style:none;
+  padding:1rem 1.05rem;
+  font-weight:700;
+  color:var(--navy);
+  font-size:1.05rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+}
+details.block>summary::-webkit-details-marker{display:none}
+details.block>summary::after{
+  content:"";
+  width:.55rem;height:.55rem;
+  border-right:2px solid var(--blue);
+  border-bottom:2px solid var(--blue);
+  transform:rotate(45deg);
+  transition:transform .2s;
+  flex:0 0 auto;
+  margin-top:-.2rem;
+}
+details.block[open]>summary::after{transform:rotate(225deg);margin-top:.2rem}
+details.block .inner{padding:0 1.05rem 1.1rem}
+.callout{
+  border-radius:14px;
+  padding:.85rem 1rem .85rem .95rem;
+  margin:1rem 0;
+  border-left:5px solid var(--blue);
+  background:var(--blue-soft);
+}
+.callout.ok{background:var(--green-bg);border-left-color:var(--green)}
+.callout.warn{background:var(--red-bg);border-left-color:var(--red)}
+.callout.tip{background:#FFF7ED;border-left-color:var(--gold)}
+.callout .lbl{
+  display:block;font-size:.75rem;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:.25rem;color:var(--navy-2)
+}
+.callout.tip .lbl{color:var(--gold)}
+.callout.ok .lbl{color:var(--green)}
+.callout.warn .lbl{color:var(--red)}
+figure.photo,figure.diagram{
+  margin:1rem 0;
+  background:var(--card);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+figure.photo img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#EDF2F7}
+figure.photo.wide img{aspect-ratio:16/10}
+figure.photo.sq img{aspect-ratio:1/1;object-fit:cover}
+figcaption{
+  font-size:.85rem;color:var(--muted);padding:.7rem .9rem .85rem;line-height:1.4
+}
+.ph{
+  margin:1rem 0;
+  border:2px dashed #A0AEC0;
+  background:repeating-linear-gradient(-45deg,#fff,#fff 8px,#F7FAFC 8px,#F7FAFC 16px);
+  border-radius:var(--radius);
+  min-height:8.5rem;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:1.2rem;
+  color:var(--muted);font-size:.95rem;font-weight:600;
+}
+.formula{
+  background:var(--blue-soft);
+  border-radius:14px;
+  padding:.9rem 1rem;
+  font-weight:700;
+  color:var(--navy);
+  margin:1rem 0;
+  line-height:1.45;
+}
+.diagram-box{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:.6rem .5rem .2rem;margin:1rem 0}
+.diagram-box svg{width:100%;height:auto;display:block}
+.diagram-box p.cap{font-size:.85rem;color:var(--muted);padding:.2rem .5rem .7rem;margin:0}
+/* lamps */
+.lamps{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:1rem 0}
+@media(min-width:500px){.lamps{grid-template-columns:repeat(4,1fr)}}
+.lamp{
+  appearance:none;border:2px solid var(--line);background:#fff;border-radius:12px;
+  padding:.55rem .3rem .5rem;cursor:pointer;text-align:center;color:var(--ink);
+  min-height:5.4rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.25rem;
+}
+.lamp:hover,.lamp:focus{border-color:var(--blue);outline:none}
+.lamp[aria-pressed="true"]{border-color:var(--navy);box-shadow:0 0 0 3px rgba(43,108,176,.2)}
+.lamp .ico{width:36px;height:36px}
+.lamp .nm{font-size:.72rem;line-height:1.2;font-weight:650}
+.lamp-panel{
+  display:none;margin:0 0 1rem;border-radius:14px;padding:.9rem 1rem;background:#fff;box-shadow:var(--shadow)
+}
+.lamp-panel.show{display:block}
+.pill{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:.15rem .5rem;border-radius:999px;margin-bottom:.35rem}
+.pill.red{background:#FED7D7;color:var(--red)}
+.pill.yellow{background:#FEFCBF;color:var(--yellow)}
+.pill.green{background:#C6F6D5;color:var(--green)}
+.pill.blue{background:#BEE3F8;color:#2A4365}
+/* stepper */
+.stepper{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem;margin:1rem 0}
+.step-dots{display:flex;gap:.35rem;margin:0 0 .8rem}
+.step-dots i{flex:1;height:6px;border-radius:99px;background:#E2E8F0}
+.step-dots i.on{background:var(--blue)}
+.step-body{min-height:8.5rem}
+.step-num{font-size:.78rem;font-weight:800;color:var(--blue);letter-spacing:.06em;text-transform:uppercase}
+.step-nav{display:flex;gap:.5rem;margin-top:.9rem}
+.step-nav button,.btn{
+  flex:1;border:0;border-radius:12px;padding:.7rem .8rem;font-weight:700;cursor:pointer;
+  background:var(--navy);color:#fff
+}
+.step-nav button[disabled]{opacity:.4;cursor:default}
+.step-nav button.ghost,.btn.ghost{background:#EDF2F7;color:var(--navy)}
+/* quiz / mini */
+.qbox{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem;margin:1.1rem 0}
+.qbox h4{margin:0 0 .65rem;color:var(--navy);font-size:1.02rem}
+.opts{display:flex;flex-direction:column;gap:.4rem}
+.opts button{
+  text-align:left;background:#F7FAFC;border:2px solid var(--line);border-radius:12px;
+  padding:.7rem .8rem;cursor:pointer;color:var(--ink)
+}
+.opts button:hover{border-color:var(--blue)}
+.opts button.correct{background:var(--green-bg);border-color:var(--green);font-weight:700}
+.opts button.wrong{background:var(--red-bg);border-color:#FC8181}
+.opts button[disabled]{cursor:default}
+.feedback{margin:.7rem 0 0;padding:.7rem .8rem;border-radius:12px;display:none;font-size:.95rem}
+.feedback.show{display:block}
+.feedback.ok{background:var(--green-bg);color:var(--green)}
+.feedback.bad{background:var(--red-bg);color:var(--red)}
+.score{
+  background:var(--navy);color:#fff;border-radius:var(--radius);padding:1.1rem 1rem;margin:1rem 0;display:none;text-align:center
+}
+.score.show{display:block}
+.score b{font-size:2rem;display:block;line-height:1.1;margin:.2rem 0}
+.scheme{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  text-align:center;background:#EBF8FF;border-radius:12px;padding:.8rem;font-weight:700;letter-spacing:.2em;color:var(--navy)
+}
+.credits{font-size:.88rem;color:var(--muted)}
+.credits a{color:var(--blue)}
+.credits li{margin:.5rem 0}
+footer.site{font-size:.9rem;color:var(--muted);padding:1.5rem 0 2rem;text-align:center}
+.toc{display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0}
+.toc a{
+  background:#fff;color:var(--navy);text-decoration:none;border-radius:999px;
+  padding:.3rem .7rem;font-size:.82rem;font-weight:650;box-shadow:var(--shadow)
+}
+
+html{scroll-behavior:auto}
+details.block,h2,h3,#quiz-h,#stepper,#quiz{scroll-margin-top:12px}
+.lesson-nav{
+  display:flex;justify-content:space-between;align-items:center;gap:.75rem;
+  margin:.2rem 0 1rem;font-weight:700;
+}
+.lesson-nav a{
+  color:var(--navy);text-decoration:none;background:#fff;
+  border-radius:999px;padding:.4rem .85rem;box-shadow:var(--shadow);font-size:.92rem
+}
+.lesson-nav a:hover{color:var(--blue)}
+.lesson-nav .spacer{flex:1}
+footer.site a{color:var(--blue);text-decoration:none}
+
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"><span id="bar"></span></div>
+<div class="wrap">
+<nav class="lesson-nav" aria-label="Уроки">
+  <a href="urok-01.html">← Урок 1</a>
+  <span class="spacer"></span>
+  <a href="index.html">Все уроки</a>
+</nav>
+<header class="hero">
+  <p class="kicker">Теоретический курс · Урок 2</p>
+  <h1>Торможение, движение назад и диагональная парковка</h1>
+  <p class="meta">Учебный автомобиль: Ford Focus 2, двигатель 1.6, механическая коробка передач</p>
+  <p class="meta">Время чтения: около 20–25 минут</p>
+  <div class="badge-row">
+    <span class="badge">Площадка</span>
+    <span class="badge">Торможение</span>
+    <span class="badge">Задний ход</span>
+    <span class="badge">Косая парковка</span>
+  </div>
+</header>
+<nav class="toc" aria-label="Содержание">
+      <a href="#зачем-этот-урок">Зачем</a>
+      <a href="#как-будет-проходить-занятие">Занятие</a>
+      <a href="#часть-1-коротко-повторим-трогание">Трогание</a>
+      <a href="#часть-2-педаль-тормоза-как-жать-и-как-дозировать">Тормоз</a>
+      <a href="#часть-4-когда-выжимать-сцепление-при-остановке">Сцепление</a>
+      <a href="#часть-5-остановка-у-метки">Метка</a>
+      <a href="#часть-7-движение-назад">Назад</a>
+      <a href="#часть-8-диагональная-косая-парковка">Парковка</a>
+      <a href="#quiz-h">Тест</a>
+    </nav>
+<details class="block" open id="зачем-этот-урок"><summary>Зачем этот урок</summary><div class="inner">
+<p>Привет. Это второй урок теории — его, как и первый, лучше прочитать спокойно до занятия, не по диагонали. На площадке слова инструктора тогда уже будут знакомыми, и голова освободится для ног и взгляда.</p>
+<p>На первом занятии ты знакомился с машиной, ловил точку схвата и учился трогаться и останавливаться на малой скорости. Сегодня мы это не бросаем, а собираем в одно умение: <strong>поехать — плавно остановиться — снова поехать</strong>. Потом добавим движение назад. И в конце разберём упражнение площадки, которое называется <strong>диагональная, или косая, парковка</strong>.</p>
+<p>В город мы снова не поедем. Скорость по-прежнему маленькая.</p><aside class="callout ok"><span class="lbl">Это нормально</span>Глохнуть, не сразу попасть в метку и криво встать в «карман» — это не провал, а обычная работа второго занятия. Инструктор сидит справа, учебные педали на месте, площадка закрытая. Задача та же: спокойно пробовать.</aside>
+</div></details>
+<details class="block" open id="как-будет-проходить-занятие"><summary>Как будет проходить занятие</summary><div class="inner">
+<p>Занятие снова на учебной площадке. Примерно так:</p>
+<ol><li>Сначала посадка, ремень, зеркала. Коротко повторите трогание тем методом, который уже знаешь: сцепление до схвата без газа, пауза около трёх секунд, затем отпустить и мягко добавить газ.</li><li>Инструктор покажет, как жать педаль тормоза: не ударом, а нажимом, который можно усилить или ослабить. Ты попробуешь несколько плавных остановок.</li><li>Появится метка — линия, конус или другое обозначение. Будете подъезжать и останавливаться у неё: не «куда получится», а намеренно.</li><li>Несколько раз свяжете трогание и торможение вперёд: поехал, подъехал, остановился, снова поехал.</li><li>Затем задняя передача. Инструктор покажет, как её включить именно на вашей машине, куда смотреть и как ползти назад на сцеплении. Попробуете поехать назад и остановиться.</li><li>Когда вперёд и назад получатся хотя бы несколько раз, инструктор покажет диагональную (косую) парковку на разметке площадки. Сначала он проедет сам или проведёт тебя по шагам, потом попробуешь ты.</li><li>Если что-то не выйдет с первого раза — это нормально. Разберёте ошибку на месте и повторите.</li></ol>
+<p>Заучивать текст наизусть не нужно. Достаточно, чтобы на площадке ты уже понимал, о чём речь. Если что-то непонятно — спрашивай сразу.</p>
+</div></details>
+<details class="block" open id="слова-которые-будут-звучать-часто"><summary>Слова, которые будут звучать часто</summary><div class="inner">
+<p><strong>Дозировка тормоза</strong> — умение не просто «нажать или отпустить», а выбрать, <em>насколько сильно</em> сейчас жать педаль, и при необходимости чуть добавить или чуть ослабить нажим, не снимая ноги.</p>
+<p><strong>Плавное торможение</strong> — такое, при котором скорость убывает постепенно, а кузов не клюёт носом резко. Педаль нажимают нарастающе и в конце чуть отпускают, чтобы машина «присела», а не ударилась об остановку.</p>
+<p><strong>Резкое (или интенсивное) торможение</strong> — короткое, сильное нажатие, когда нужно быстро сбросить скорость. На площадке его могут показать, чтобы ты почувствовал разницу. В обычных попытках сегодня мы учимся именно плавному.</p>
+<p><strong>Накат</strong> — движение машины по инерции, когда мотор уже не толкает колёса (например, выжато сцепление или включена нейтраль). Тормозить на накате можно, но машина тогда хуже «держит» скорость сама, и новичку это часто мешает рассчитывать остановку.</p>
+<p><strong>Метка</strong> — линия, конус, стойка или другое обозначение на площадке, у которого нужно остановиться. Не обязательно вплотную «носом в знак»: инструктор скажет, что считается удачной остановкой.</p>
+<p><strong>Задняя передача (R)</strong> — передача для движения назад. На Focus 2 её обычно включают, приподняв кольцо под рукояткой и отведя рычаг левее первой, вперёд. Если схема на вашей рукоятке другая — смотри на неё и повторяй за инструктором.</p>
+<p><strong>Диагональная (косая) парковка</strong> — упражнение на площадке: заехать в размеченный «карман», который стоит к проезду не прямо, а под углом. Как именно размечена ваша площадка и с какой стороны заезжаете — покажет инструктор.</p>
+<p><strong>Ориентир</strong> — то, на что ты смотришь, чтобы понять, когда начинать крутить руль или когда уже пора останавливаться. Это может быть линия, конус, край капота, стойка двери, зеркало. <strong>Точные ориентиры на вашей машине и вашей разметке покажет инструктор</strong> — в этом уроке мы разберём логику, а не «магические точки», которые на другой площадке могут не совпасть.</p>
+</div></details>
+<details class="block" open id="часть-1-коротко-повторим-трогание"><summary>Часть 1. Коротко повторим трогание</summary><div class="inner">
+<div class="diagram-box">
+<svg viewBox="0 0 360 150" role="img" aria-label="Ход педали сцепления: от пола через точку схвата до полностью отпущенной">
+  <rect x="8" y="8" width="344" height="134" rx="16" fill="#EBF8FF" stroke="#90CDF4"/>
+  <text x="180" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">Наше трогание коротко</text>
+  <rect x="30" y="62" width="300" height="18" rx="9" fill="#CBD5E0"/>
+  <rect x="30" y="62" width="90" height="18" rx="9" fill="#2C5282"/>
+  <rect x="150" y="58" width="70" height="26" rx="8" fill="#C05621"/>
+  <text x="75" y="76" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="system-ui,sans-serif">в пол</text>
+  <text x="185" y="76" text-anchor="middle" fill="#fff" font-size="10" font-weight="800" font-family="system-ui,sans-serif">схват</text>
+  <text x="300" y="56" text-anchor="middle" font-size="10" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">отпущено</text>
+  <text x="180" y="108" text-anchor="middle" font-size="11" fill="#4A5568" font-family="system-ui,sans-serif">До схвата — без газа, подержать около 3 с,</text>
+  <text x="180" y="124" text-anchor="middle" font-size="11" fill="#4A5568" font-family="system-ui,sans-serif">затем отпустить сцепление и мягко добавить газ</text>
+</svg>
+<p class="cap">Шаги те же, что на первом занятии. Сегодня эта цепочка понадобится много раз подряд — и вперёд, и назад.</p>
+</div>
+<p>Сегодня без трогания ничего не начнётся, поэтому сначала коротко — тем же методом, что и на первом занятии. Ничего нового в самих шагах нет. Если они уже получаются, просто освежи их в голове. Если ещё путаются — тем более прочитай ещё раз: сегодня они понадобятся много раз подряд.</p>
+<p>Порядок такой:</p>
+<ol><li>Выжми <strong>сцепление до пола</strong> и включи <strong>первую передачу</strong>. Рычаг уйдёт влево и вперёд (сверься со схемой на рукоятке). Он должен встать в гнездо, а не остаться болтаться в нейтрали.</li><li><strong>Сними ручник</strong>: чуть вверх, кнопка, вниз до конца. Красная лампа ручника гаснет. Правая нога может пока держаться на тормозе, затем тормоз отпускаешь.</li><li>Плавно, не бросая, поднимай левую ногу, пока не почувствуешь <strong>точку схвата</strong>. <strong>Газ пока не трогай совсем.</strong> Кузов чуть вздрагивает, звук мотора становится чуть ниже и тяжелее.</li><li>Поймай схват и <strong>подержи примерно три секунды</strong>: машина сама начнёт очень медленно ползти. Потом плавно отпусти сцепление до конца и мягко добавь газ.</li></ol>
+<p>Цепочкой это звучит так: <strong>сцепление в пол → первая → снять ручник → подвести сцепление до схвата без газа → подержать около трёх секунд → отпустить сцепление до конца и мягко добавить газ.</strong></p>
+<p>Если заглохла — ничего страшного. Спокойно: сцепление в пол, тормоз, нейтраль, заведи мотор снова и с этих же шагов. Сегодня таких циклов будет больше, чем вчера, и глохнуть по дороге к метке тоже можно.</p>
+<p>Правая нога по-прежнему работает только с одной педалью: либо газ, либо тормоз, никогда с двумя сразу. Когда собираешься тормозить — газ сначала полностью отпускаешь.</p>
+<aside class="callout tip"><span class="lbl">Совет инструктора</span>Не сокращай паузу на схвате, даже если уже «нетерпеливо». Три секунды как раз учат ногу не бросать педаль — сегодня это понадобится и вперёд, и назад.</aside>
+</div></details>
+<details class="block" open id="часть-2-педаль-тормоза-как-жать-и-как-дозировать"><summary>Часть 2. Педаль тормоза: как жать и как дозировать</summary><div class="inner">
+<figure class="photo">
+  <img src="images/light-switch-stalk.jpg" alt="Педали и крутилка света слева на панели европейского Focus Mk2" loading="lazy" width="1400" height="1050">
+  <figcaption>На снимке европейский Focus RS Mk2: видны левая часть панели и педали. Тормоз — средняя педаль, только для правой ноги. Сиденья и шильдик RS у учебного 1.6 другие, расположение педалей такое же.</figcaption>
+</figure><div class="ph" role="img" aria-label="Здесь будет фото из машины инструктора">Здесь будет фото из машины инструктора<br>Крупный план правой ноги на педали тормоза учебной машины: подушечка стопы, пятка опирается о пол.</div>
+<p>Тормоз — средняя педаль, только для правой ноги. На ощупь она обычно чуть выше и «жёстче», чем газ. Нажимай её подушечкой стопы, не носком и не каблуком. Пятку удобно слегка опереть о пол и качать стопу в голеностопе: так легче дозировать нажим, чем если вся нога летает в воздухе.</p>
+<p>Важная привычка: <strong>нога переходит с газа на тормоз целиком</strong>. Не оставляй край стопы на газе, «на всякий случай». Сначала полностью отпусти газ, потом перенеси ногу на тормоз и нажми. На малых скоростях площадки это занимает мгновение, и его как раз стоит делать спокойно, не дёргаясь.</p>
+<p>Тормоз — не выключатель света, у которого есть только «вкл» и «выкл». Это скорее губка или тюбик с зубной пастой: чем сильнее жмёшь, тем сильнее машина замедляется. Можно нажать чуть-чуть — и она будет совсем мягко терять скорость. Можно нажать увереннее — и замедление станет заметным. Можно, уже тормозя, <strong>добавить</strong> нажим, если видишь, что к метке не успеваешь. Можно <strong>чуть отпустить</strong>, если понял, что тормозишь слишком рано и сильно.</p>
+<p>Это и есть дозировка. Ей невозможно научиться «в голове»: её чувствуют ногой. Но голова должна знать, чего ты хочешь. Хочешь плавно остановиться — начинай со спокойного нажима и при необходимости добавляй. Не пытайся с первого раза угадать «идеальную силу» одним тычком.</p>
+<p>Нажимай уверенно, но без удара «со всего размаха». Удар по педали даёт резкий клевок: пассажир (а это инструктор) клюёт носом, ты сам подаёшься в ремень, и после такого трудно сразу точно попасть в метку. Представь, что в салоне стоит стакан воды. Останавливаемся так, чтобы он не упал.</p>
+<p>Когда машина уже почти стоит, педаль в самом конце чуть отпускают — не снимают ногу совсем, а уменьшают нажим. Тогда остановка получается «мягкой», без тычка. Если держать педаль жёстко в пол до самого нуля, нос машины часто клюёт в последний момент. Это не опасно на площадке, но привычку лучше сразу ставить мягкую.</p>
+<p>После полной остановки тормоз не бросай сразу: пока стоишь, правая нога держит педаль (или, если инструктор скажет постоять дольше, затягиваете ручник и уже тогда можно убрать ноги — как он покажет).</p>
+<div class="qbox mini-q" id="mq2">
+  <h4>Проверь себя</h4>
+  <p>Можно ли во время торможения чуть сильнее нажать или чуть отпустить педаль, не снимая ноги?</p>
+  <div class="opts"><button type="button" data-ok="0">а) Нет, тормоз только «нажал до конца» или «полностью отпустил»</button><button type="button" data-ok="1">б) Да, силу нажима можно добавлять и ослаблять — это и есть дозировка</button><button type="button" data-ok="0">в) Только если выжато сцепление</button></div>
+  <div class="feedback" data-explain="Тормоз — не выключатель. Силу нажима как раз и меняют по ходу, чтобы попасть в метку плавно."></div>
+</div>
+</div></details>
+<details class="block" open id="часть-3-плавное-и-резкое-торможение"><summary>Часть 3. Плавное и резкое торможение</summary><div class="inner">
+<div class="diagram-box">
+<svg viewBox="0 0 360 300" role="img" aria-label="Графики: плавное торможение — нарастающий нажим и мягкий отпуск; резкое — крутой сильный нажим">
+  <rect x="8" y="8" width="344" height="284" rx="16" fill="#EBF8FF" stroke="#90CDF4"/>
+  <text x="180" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">Сила нажима на тормоз со временем</text>
+
+  <!-- smooth -->
+  <text x="28" y="50" font-size="12" font-weight="700" fill="#276749" font-family="system-ui,sans-serif">Плавное</text>
+  <line x1="40" y1="130" x2="330" y2="130" stroke="#A0AEC0" stroke-width="1"/>
+  <line x1="40" y1="58" x2="40" y2="130" stroke="#A0AEC0" stroke-width="1"/>
+  <text x="24" y="70" font-size="9" fill="#4A5568" font-family="system-ui,sans-serif" text-anchor="middle">сильнее</text>
+  <text x="336" y="142" font-size="9" fill="#4A5568" font-family="system-ui,sans-serif" text-anchor="end">время</text>
+  <path d="M40 128 C 70 126, 90 100, 120 88 C 150 76, 190 78, 230 86 C 260 92, 280 110, 320 128" fill="none" stroke="#276749" stroke-width="3.5" stroke-linecap="round"/>
+  <text x="185" y="74" font-size="10" fill="#276749" font-family="system-ui,sans-serif" text-anchor="middle">чуть отпустил перед остановкой</text>
+
+  <!-- sharp -->
+  <text x="28" y="168" font-size="12" font-weight="700" fill="#9B2C2C" font-family="system-ui,sans-serif">Резкое</text>
+  <line x1="40" y1="250" x2="330" y2="250" stroke="#A0AEC0" stroke-width="1"/>
+  <line x1="40" y1="176" x2="40" y2="250" stroke="#A0AEC0" stroke-width="1"/>
+  <text x="24" y="188" font-size="9" fill="#4A5568" font-family="system-ui,sans-serif" text-anchor="middle">сильнее</text>
+  <text x="336" y="262" font-size="9" fill="#4A5568" font-family="system-ui,sans-serif" text-anchor="end">время</text>
+  <path d="M40 248 L 130 248 L 150 186 L 250 186 L 270 248 L 330 248" fill="none" stroke="#9B2C2C" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="176" font-size="10" fill="#9B2C2C" font-family="system-ui,sans-serif" text-anchor="middle">решительный сильный нажим</text>
+
+  <text x="180" y="282" text-anchor="middle" font-size="11" fill="#4A5568" font-family="system-ui,sans-serif">Сегодня по умолчанию — верхний график</text>
+</svg>
+<p class="cap">Плавное: нажим нарастает спокойно, в конце чуть слабее. Резкое инструктор может показать отдельно, чтобы ты почувствовал разницу. К метке «ударом» не подъезжают.</p>
+</div>
+<p>На втором занятии важно не только «уметь остановиться», но и понимать, <em>какое</em> торможение ты сейчас делаешь.</p>
+<p><strong>Плавное</strong> — наше основное сегодня. Ты заранее видишь, где хочешь остановиться или насколько хочешь сбавить скорость. Педаль нажимаешь нарастающе: сначала спокойно, затем, если нужно, чуть плотнее. Скорость убывает ровно. Перед самой остановкой нажим чуть ослабляешь. Кузов приседает мягко. Именно так вы будете подъезжать к метке, заканчивать попытку парковки и просто останавливаться, чтобы тронуться снова.</p>
+<p><strong>Резкое, или интенсивное</strong>, — когда нужно быстро сбросить скорость. Педаль нажимают решительно и заметно сильнее, не «тычком от испуга», а одним уверенным ходом. Машина клюёт заметнее, ремень может чуть держаться за тебя. На учебной площадке в обычных попытках так тормозить не нужно: места много, скорость маленькая, никто внезапно не выбегает. Но инструктор может <em>показать</em> разницу, чтобы ты почувствовал, как педаль умеет работать не только «нежно».</p>
+<p>Если когда-нибудь (позже, не обязательно сегодня) при очень сильном торможении педаль вдруг задрожит или застучит под ногой — на многих Focus 2 это срабатывает <strong>ABS</strong>, антиблокировка. Она не даёт колёсам полностью юзом скользить. Ногу в такой момент с педали не снимают и «насосом» не качают: держишь нажим, машина сама дотормаживает. На тихой площадке второго занятия до этого, скорее всего, дело не дойдёт. Просто имей в виду, чтобы потом не испугаться незнакомого ощущения.</p>
+<p>Что запомнить практично: <strong>сегодня по умолчанию тормозим плавно</strong>. Резкое — только если инструктор специально попросит почувствовать разницу, и он тебя к этому подготовит. Путать эти два режима не стоит: к метке «ударом» не подъезжают, а в учебной спокойной попытке незачем вжимать педаль до отказа.</p>
+<p>Ещё одно ощущение: чем выше скорость, тем раньше нужно начинать плавное торможение. На площадке скорость маленькая, но привычка одна и та же — смотри вперёд и давай себе запас, а не тормози в последний момент изо всех сил.</p>
+<aside class="callout tip"><span class="lbl">Совет инструктора</span>Представь, что в салоне стоит стакан воды. К метке подъезжаем так, чтобы он не упал. Резкое торможение сегодня — только если инструктор сам попросит почувствовать разницу.</aside>
+</div></details>
+<details class="block" open id="часть-4-когда-выжимать-сцепление-при-остановке"><summary>Часть 4. Когда выжимать сцепление при остановке</summary><div class="inner">
+<p>На первом занятии правило было простым: <strong>малая скорость — сцепление и тормоз вместе</strong>. Оно никуда не делось. Сегодня скорость в большинстве попыток всё ещё маленькая, особенно когда ты только ползёшь после схвата или уже почти подошёл к метке. В этих ситуациях по-прежнему: левая нога — сцепление в пол, правая — тормоз.</p>
+<p>Почему это важно, напомним коротко. Если на первой передаче, уже почти стоя, жать один только тормоз и не выжать сцепление, колёса останавливаются, а мотор через коробку всё ещё связан с ними. Обороты падают, и мотор часто глохнет. Сцепление как раз расцепляет мотор с колёсами, чтобы он продолжал работать, пока ты останавливаешься.</p>
+<p>Сегодня появится и вторая ситуация. Когда ты уже поехал чуть увереннее, не совсем ползком — например, проехал прямой отрезок и только потом начал тормозить к метке, — порядок чуть другой:</p>
+<p><strong>сначала тормоз, сцепление — перед самой остановкой</strong>, когда скорость уже упала и мотор вот-вот начнёт «задыхаться».</p>
+<p>Зачем сначала тормоз, а не сразу сцепление? Пока сцепление отпущено и передача включена, мотор помогает машине замедляться (это называют торможением двигателем). Если заранее выжать сцепление и ехать на накате, машина как будто «плывёт», скорость падает неохотнее, и новичку труднее попасть в метку. Кроме того, на накате легче закрутить скорость чуть больше, чем хотел, сам того не заметив.</p>
+<p>Как поймать момент для сцепления: ты уже тормозишь, скорость стала маленькой, звук мотора тяжелеет, стрелка тахометра падает, кузов как будто чуть «натягивается». Вот тогда — сцепление в пол, а правая нога продолжает дотормаживать до полной остановки. Если выжать слишком рано, будет накат. Если слишком поздно — мотор может заглохнуть. Ничего страшного: после нескольких попыток нога начинает успевать сама. Инструктор подскажет, если будешь жать слишком рано или слишком поздно.</p>
+<p>Очень грубо, без точных цифр (их на площадке всё равно лучше не считать по спидометру): <strong>ползёшь, как на первом занятии, — сцепление и тормоз вместе. Уже едешь, и до остановки ещё есть путь — сначала тормоз, сцепление в конце.</strong> Если сомневаешься, на второй передаче мы сегодня, скорее всего, ещё не живём, и инструктор скажет, когда правило менять. Не усложняй сам.</p>
+<p>После полной остановки:</p>
+<ul><li>держи сцепление и тормоз;</li><li>если сразу трогаешься снова — можно не включать нейтраль, а из первой (сцепление в пол, тормоз, затем шаги трогания);</li><li>если нужно постоять дольше — нейтраль, плавно отпустить сцепление, тормоз держать или затянуть ручник, как скажет инструктор.</li></ul>
+<p>Пока учимся, после остановки не торопись снимать ноги: сначала пойми, что точно стоишь, и только потом думай о следующем шаге.</p>
+<div class="qbox mini-q" id="mq4">
+  <h4>Проверь себя</h4>
+  <p>Если ты уже не ползёшь, а проехал прямой кусок и только потом тормозишь к метке — что раньше?</p>
+  <div class="opts"><button type="button" data-ok="0">а) Сразу сцепление, чтобы ехать на накате</button><button type="button" data-ok="1">б) Сначала тормоз, сцепление — когда скорость уже маленькая, перед остановкой</button><button type="button" data-ok="0">в) Сначала нейтраль, потом тормоз</button></div>
+  <div class="feedback" data-explain="Сначала тормоз: мотор ещё помогает замедляться. Сцепление — в конце, чтобы не заглохнуть."></div>
+</div>
+<aside class="callout tip"><span class="lbl">Совет инструктора</span>Если сомневаешься и уже почти стоишь — сделай как на первом занятии: сцепление и тормоз вместе. Лучше чуть раньше выжать сцепление у самой метки, чем заглохнуть в последний момент.</aside>
+</div></details>
+<details class="block" open id="часть-5-остановка-у-метки"><summary>Часть 5. Остановка у метки</summary><div class="inner">
+<p>Остановиться «где-нибудь» и остановиться <strong>у метки</strong> — разные умения. Второе как раз сегодня и появляется.</p>
+<p>Меткой может быть линия на асфальте, конус, стойка, край щита. Инструктор объяснит, что считается хорошей остановкой: обычно это не «проехать носом через знак», а встать так, чтобы передняя часть машины оказалась у условной границы, с небольшим запасом. Точный критерий на вашей площадке покажет он.</p>
+<p>Как к этому подходить.</p>
+<p>Смотри на метку <strong>заранее</strong>, а не в последний момент и не под самый капот. Если уставиться в линию у своего бампера, она «подпрыгивает» внезапно, и ты либо проскакиваешь, либо бьёшь по тормозу слишком резко. Взгляд — вперёд, к метке, как будто уже видишь, где будешь стоять. Педали при этом находятся ногами, без взгляда вниз.</p>
+<p>Начинай тормозить <strong>с запасом</strong>. Лучше чуть раньше и мягче, чем в последний момент и изо всех сил. Если понял, что останавливаешься слишком рано, можно чуть ослабить педаль и аккуратно докатить. Если понял, что поздновато, — спокойно добавь нажим, не впадая в удар по педали. Это и есть дозировка в деле.</p>
+<p>Перед самой остановкой чуть ослабь тормоз, чтобы не было тычка, и вовремя выжми сцепление — по правилу из предыдущей части. Машина должна замереть, а не «кивнуть и откатиться». Если после остановки тебя чуть подало вперёд или назад — просто поправь: тормоз держи, убедись, что стоишь, при необходимости ручник, как скажет инструктор.</p>
+<p>Не получилось попасть точно — обычное дело. Заметь: рано остановился или проскочил, слишком резко или слишком слабо. Следующая попытка — с этой маленькой поправкой, а не «с нуля и с паникой». Никто не ждёт миллиметровой точности со второй попытки.</p>
+<p>Ещё одна тонкость: если метка близко, а ты только что тронулся и ещё на схвате, не торопись сразу газовать. Иногда достаточно короткого ползка на сцеплении и сразу спокойного торможения. Инструктор подскажет, когда «отрезок» короткий, а когда можно проехать чуть свободнее.</p>
+<div class="qbox mini-q" id="mq5">
+  <h4>Проверь себя</h4>
+  <p>Почему к метке смотрят заранее, а не под самый капот?</p>
+  <div class="opts"><button type="button" data-ok="1">а) Чтобы линия не «появилась внезапно» и можно было тормозить с запасом, дозируя нажим</button><button type="button" data-ok="0">б) Чтобы не смотреть в зеркала</button><button type="button" data-ok="0">в) Это нужно только на экзамене</button></div>
+  <div class="feedback" data-explain="Взгляд вперёд даёт запас. Если смотреть под капот, часто бьют по тормозу в последний момент или проскакивают."></div>
+</div>
+<aside class="callout tip"><span class="lbl">Совет инструктора</span>Лучше остановиться чуть раньше и аккуратно докатить, чем в последний момент бить по педали. Следующая попытка — с одной поправкой, без паники.</aside>
+</div></details>
+<details class="block" open id="часть-6-трогание-и-торможение-вперёд-связка-упражнений"><summary>Часть 6. Трогание и торможение вперёд: связка упражнений</summary><div class="inner">
+<p>Сегодня эти два действия будут идти одно за другим много раз. Это уже не «отдельная тема трогания» и не «отдельная тема тормоза», а одна связка: <strong>поехал — подъехал — остановился — снова поехал</strong>.</p>
+<p>Типичный цикл такой:</p>
+<ol><li>Трогание нашим методом, без спешки.</li><li>Короткая ровная езда, взгляд вперёд.</li><li>Плавное торможение к метке или к тому месту, которое назвал инструктор.</li><li>Полная остановка, сцепление и тормоз, короткая пауза.</li><li>Снова трогание.</li></ol>
+<p>Именно пауза после остановки полезна. Не срывайся в следующее трогание в ту же секунду: проверь, что стоишь, что передача та, что нужна, что путь впереди свободный. Потом — снова шаги схвата.</p>
+<p>На прямом участке можно поймать уже не только «поехать», но и ровную маленькую скорость. Если мотор просит помощи — чуть газа, без рывка. Если разогнался больше, чем комфортно, спокойно притормози. Сегодня не соревнование, кто дальше проедет без остановки.</p>
+<p>Если заглох на старте или в конце торможения — знакомая цепочка: сцепление, тормоз, нейтраль, запуск, и снова шаги трогания. Не нужно извиняться и не нужно торопиться «наверстать».</p>
+<p>Инструктор может поставить две метки: старт у одной, остановка у другой. Или попросить остановиться, проехать ещё кусок и остановиться снова. Смысл один и тот же. Когда связка вперёд начнёт получаться хотя бы «через раз», можно переходить к задней передаче. Если ещё не получается — лучше ещё несколько циклов вперёд, чем спешить назад. Это решит инструктор, и это нормально.</p>
+</div></details>
+<details class="block" open id="часть-7-движение-назад"><summary>Часть 7. Движение назад</summary><div class="inner">
+<div class="diagram-box">
+<svg viewBox="0 0 360 260" role="img" aria-label="Вид сверху: главный взгляд назад в заднее стекло, зеркала в помощь">
+  <rect x="8" y="8" width="344" height="244" rx="16" fill="#EBF8FF" stroke="#90CDF4"/>
+  <text x="180" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">Куда смотреть, когда едешь назад</text>
+
+  <!-- car, front toward top -->
+  <rect x="130" y="48" width="100" height="155" rx="16" fill="#FFF" stroke="#1B365D" stroke-width="3"/>
+  <!-- windshield -->
+  <rect x="140" y="58" width="80" height="28" rx="4" fill="#BEE3F8" stroke="#2C5282"/>
+  <text x="180" y="77" text-anchor="middle" font-size="9" fill="#2C5282" font-family="system-ui,sans-serif">капот / лобовое</text>
+  <!-- rear window -->
+  <rect x="140" y="165" width="80" height="26" rx="4" fill="#BEE3F8" stroke="#2C5282"/>
+  <text x="180" y="182" text-anchor="middle" font-size="9" fill="#2C5282" font-family="system-ui,sans-serif">заднее стекло</text>
+  <!-- driver -->
+  <circle cx="198" cy="120" r="11" fill="#F6AD55" stroke="#C05621" stroke-width="2"/>
+  <text x="224" y="124" font-size="10" fill="#C05621" font-family="system-ui,sans-serif">ты</text>
+
+  <!-- main gaze back -->
+  <path d="M198 132 C 205 150, 200 168, 180 178" fill="none" stroke="#C05621" stroke-width="2.8" stroke-dasharray="5 4"/>
+  <polygon points="180,178 174,168 188,170" fill="#C05621"/>
+  <circle cx="180" cy="200" r="11" fill="#FFF7ED" stroke="#C05621" stroke-width="2"/>
+  <text x="180" y="204" text-anchor="middle" font-size="11" font-family="system-ui,sans-serif">👁</text>
+
+  <!-- mirrors -->
+  <rect x="108" y="85" width="18" height="10" rx="2" fill="#2C5282"/>
+  <rect x="234" y="85" width="18" height="10" rx="2" fill="#2C5282"/>
+  <path d="M198 114 L 120 90" fill="none" stroke="#2B6CB0" stroke-width="1.6" stroke-dasharray="3 3"/>
+  <path d="M198 114 L 240 90" fill="none" stroke="#2B6CB0" stroke-width="1.6" stroke-dasharray="3 3"/>
+  <text x="70" y="88" font-size="10" fill="#2B6CB0" font-family="system-ui,sans-serif">левое</text>
+  <text x="256" y="88" font-size="10" fill="#2B6CB0" font-family="system-ui,sans-serif">правое</text>
+  <text x="70" y="102" font-size="10" fill="#2B6CB0" font-family="system-ui,sans-serif">зеркало</text>
+  <text x="256" y="102" font-size="10" fill="#2B6CB0" font-family="system-ui,sans-serif">зеркало</text>
+
+  <text x="180" y="230" text-anchor="middle" font-size="11" font-weight="700" fill="#C05621" font-family="system-ui,sans-serif">Главный взгляд — в заднее стекло,</text>
+  <text x="180" y="244" text-anchor="middle" font-size="11" fill="#4A5568" font-family="system-ui,sans-serif">в сторону движения. Зеркала — в помощь.</text>
+</svg>
+<p class="cap">Перед началом посмотри по сторонам и назад. Пока едешь, иногда на секунду возвращай взгляд вперёд: нос при повороте руля уходит в сторону.</p>
+</div><div class="ph" role="img" aria-label="Здесь будет фото из машины инструктора">Здесь будет фото из машины инструктора<br>Вид назад из учебной машины: заднее стекло, салонное и боковые зеркала.</div>
+<p>Ехать назад на площадке — не «высший пилотаж», а обычный следующий шаг. Скорость ещё меньше, чем вперёд. Руль работает так же, но машина иначе отзывается на поворот, и расстояние чувствуется хуже: сзади у тебя нет капота, который служит подсказкой, зато есть большой кузов за спиной. Поэтому назад мы едем медленно и смотрим туда, куда едем.</p>
+<h3>Как включить заднюю на Focus 2</h3>
+<p>Сначала полностью остановись. Заднюю на ходу не включают.</p>
+<p>Выжми сцепление до пола. Если была первая, выведи рычаг в нейтраль (покачай влево-вправо: свободный ход — ты в нейтрали) и уже из нейтрали включай заднюю. Так меньше риска «не попасть» в паз.</p>
+<p>На большинстве учебных Focus 2 под рукояткой есть кольцо (юбка, «колечко»). Его нужно <strong>приподнять пальцами</strong> и только потом вести рычаг влево и вперёд — левее первой передачи. Кольцо как раз не даёт включить заднюю случайно вместо первой. Рычаг должен встать в гнездо, упруго, а не болтаться.</p>
+<p>Если на вашей рукоятке схема или фиксатор выглядят иначе — <strong>смотри схему на рычаге и повтори движение за инструктором</strong>. Не угадывай и не применяй силу. Если задняя не входит, не дави: выжми сцепление ещё раз, верни рычаг в нейтраль, приподними кольцо и повтори спокойно. Иногда чуть-чуть отпустив и снова выжав сцепление, «зубы» шестерён совпадают, и передача входит мягко.</p>
+<p>Перед тем как ползти назад, ещё раз проверь: ремень застёгнут, путь сзади свободен, инструктор готов. Ручник, если был затянут, снимаешь так же, как при трогании вперёд.</p>
+<h3>Куда смотреть</h3>
+<p>Самая частая ошибка назад — смотреть только в капот или только в одно зеркало и ехать «наугад».</p>
+<p>На учебной площадке на малой скорости основное такое: <strong>поверни корпус и голову и смотри в заднее стекло, в ту сторону, куда машина сейчас поедет</strong>. Обычно это через правое плечо, иногда инструктор попросит посмотреть и через левое — как удобнее контролировать именно ваш манёвр. Зеркала при этом не выключают: быстро сверься с ними, особенно с боковыми, чтобы видеть края и то, что сбоку. Но ведущий взгляд — туда, куда едешь, а не в приборы и не в пол.</p>
+<p>Перед началом движения назад посмотри и по сторонам: слева, справа, сзади. На площадке могут быть другие учебные машины, конусы, стойки. Если сомневаешься, что путь свободен, не начинай — спроси инструктора.</p>
+<p>Пока едешь назад, периодически возвращай взгляд вперёд на секунду: нос машины при повороте руля уходит в сторону, и это тоже нужно контролировать. Но не «зависай» взглядом в капоте. Как на круге: куда смотришь, туда часто и едешь.</p>
+<p>Руль крути спокойно, двумя руками. Запомни простую вещь, которая сначала путает всех: когда едешь назад и крутишь руль, <strong>кормовая часть машины идёт в ту сторону, в которую ты поворачиваешь верх руля</strong>, а нос уходит в противоположную. Не пытайся это вызубрить как формулу в голове: на первых попытках крути медленно и смотри, что делает зад машины. Ощущение приходит глазами, не схемой. Если запутался — остановись, подумай, и продолжай медленно. Точные подсказки по рулю на вашей попытке даст инструктор.</p>
+<h3>Скорость и сцепление</h3>
+<p>Назад мы почти всегда едем очень медленно, часто на грани схвата, почти как в момент трогания. Это удобно: скорость маленькая, ты успеваешь смотреть и при необходимости сразу остановиться.</p>
+<p>Практичный способ такой же по духу, как наше трогание: сцепление до пола, задняя включена, ручник снят, правая нога на тормозе, затем плавно подведи сцепление до схвата <strong>без газа</strong> (или почти без газа — как скажет инструктор). Машина сама начнёт тихо ползти назад. Если этого ползка достаточно, газ можно не добавлять совсем. Если мотор просит чуть помощи — совсем немного газа, без рывка, и сцепление не бросай.</p>
+<p>Долго держать сцепление в скольжении «в полпедали» без нужды не стоит: диск нагревается. Но на коротких учебных попытках назад работа около схвата — нормальный инструмент, именно она даёт тебе контроль. Поймал медленное движение — можно чуть отпустить педаль и ехать ровно, или, наоборот, чуть притопить сцепление, если разогнался больше, чем хотел. Левая нога здесь как кран скорости.</p>
+<p>Если заглох при трогании назад — та же цепочка: сцепление, тормоз, нейтраль, запуск. Потом снова задняя и те же шаги. Это бывает так же часто, как вперёд, и это так же нормально.</p>
+<h3>Торможение задним ходом</h3>
+<p>Тормозишь всё той же правой ногой, всё той же средней педалью. Новое только в ощущениях: кузов иначе покачивается, расстояние до конуса сзади кажется то слишком большим, то внезапно маленьким. Поэтому скорость держи совсем маленькой, а тормоз начинай чуть раньше, чем «кажется, что ещё рано».</p>
+<p>На такой малой скорости правило простое и знакомое: <strong>сцепление и тормоз вместе</strong>. Выжал сцепление в пол, правой ногой плавно остановил машину. Перед самой остановкой, как и вперёд, можно чуть ослабить нажим, чтобы не было тычка.</p>
+<p>После остановки не бросай педали. Посмотри, где оказался. Если нужно проехать ещё чуть назад — снова схват и короткий ползок. Если нужно поехать вперёд — полная остановка, сцепление в пол, нейтраль, затем первая, и уже шаги трогания вперёд. Передачи «через ходьбу» не переключают: сначала остановились, потом включили нужную.</p>
+<p>Не крути руль резко на ходу назад и не разгоняйся, «чтобы быстрее закончить попытку». Назад мы учим контроль, не скорость.</p>
+<div class="qbox mini-q" id="mq7">
+  <h4>Проверь себя</h4>
+  <p>Когда включают заднюю передачу на Focus 2?</p>
+  <div class="opts"><button type="button" data-ok="0">а) На ходу, чтобы не терять время</button><button type="button" data-ok="1">б) Только после полной остановки, по схеме на рукоятке, обычно с кольцом</button><button type="button" data-ok="0">в) После пятой передачи, «через одну»</button></div>
+  <div class="feedback" data-explain="Заднюю на ходу не включают. Смотри схему на рычаге и повторяй за инструктором, если фиксатор выглядит иначе."></div>
+</div>
+<aside class="callout tip"><span class="lbl">Совет инструктора</span>Сначала взгляд назад и по сторонам, потом короткий ползок на схвате. Если запутался в руле — остановись, посмотри, куда уехала корма, и продолжай совсем медленно.</aside>
+</div></details>
+<details class="block" open id="часть-8-диагональная-косая-парковка"><summary>Часть 8. Диагональная (косая) парковка</summary><div class="inner">
+<div class="diagram-box">
+<svg viewBox="0 0 360 300" role="img" aria-label="Схема диагональной парковки: подход вдоль ряда, поворот в карман, выравнивание руля, остановка">
+  <rect x="8" y="8" width="344" height="284" rx="16" fill="#EBF8FF" stroke="#90CDF4"/>
+  <text x="180" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">Косая парковка: общая схема</text>
+
+  <!-- lane -->
+  <rect x="20" y="210" width="320" height="50" fill="#EDF2F7"/>
+  <line x1="20" y1="210" x2="340" y2="210" stroke="#A0AEC0" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="300" y="252" font-size="10" fill="#4A5568" font-family="system-ui,sans-serif">проезд →</text>
+
+  <!-- angled stalls: parallelograms leaning right-up from the lane -->
+  <!-- stall 1 -->
+  <polygon points="40,210 88,210 128,70 80,70" fill="#fff" stroke="#2B6CB0" stroke-width="1.5"/>
+  <!-- stall 2 (target) -->
+  <polygon points="108,210 156,210 196,70 148,70" fill="#FFF7ED" stroke="#C05621" stroke-width="2.5"/>
+  <!-- stall 3 -->
+  <polygon points="176,210 224,210 264,70 216,70" fill="#fff" stroke="#2B6CB0" stroke-width="1.5"/>
+
+  <!-- trajectory -->
+  <path d="M28 232 C 90 232, 120 230, 148 200 C 168 174, 172 140, 172 115" fill="none" stroke="#C05621" stroke-width="2.5" stroke-dasharray="6 5"/>
+  <polygon points="172,115 166,126 180,124" fill="#C05621"/>
+
+  <!-- approaching car -->
+  <rect x="24" y="222" width="28" height="16" rx="3" fill="#1B365D"/>
+  <!-- parked car in stall, angled -->
+  <g transform="translate(160,130) rotate(-20)">
+    <rect x="-10" y="-20" width="20" height="36" rx="4" fill="#1B365D"/>
+  </g>
+
+  <!-- numbered moments -->
+  <circle cx="48" cy="232" r="9" fill="#1B365D"/>
+  <text x="48" y="236" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="system-ui,sans-serif">1</text>
+  <circle cx="148" cy="204" r="9" fill="#C05621"/>
+  <text x="148" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="system-ui,sans-serif">2</text>
+  <circle cx="176" cy="150" r="9" fill="#C05621"/>
+  <text x="176" y="154" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="system-ui,sans-serif">3</text>
+  <circle cx="170" cy="96" r="9" fill="#276749"/>
+  <text x="170" y="100" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="system-ui,sans-serif">4</text>
+
+  <text x="20" y="276" font-size="10" fill="#1B365D" font-family="system-ui,sans-serif">1 подход</text>
+  <text x="85" y="276" font-size="10" fill="#C05621" font-family="system-ui,sans-serif">2 начало поворота</text>
+  <text x="195" y="276" font-size="10" fill="#C05621" font-family="system-ui,sans-serif">3 выпрями руль</text>
+  <text x="290" y="276" font-size="10" fill="#276749" font-family="system-ui,sans-serif">4 стоп</text>
+</svg>
+<p class="cap">Сторона заезда и рисунок линий на вашей площадке могут отличаться. Точку 2 и точку 3 инструктор привяжет к ориентирам на вашей машине — не заучивай чужие «магические точки» из интернета.</p>
+</div><div class="stepper" id="stepper" data-step="0">
+  <div class="step-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="step-body" id="step-body"></div>
+  <div class="step-nav">
+    <button type="button" class="ghost" id="step-prev" disabled>Назад</button>
+    <button type="button" id="step-next">Дальше</button>
+  </div>
+</div><div class="ph" role="img" aria-label="Здесь будет фото из машины инструктора">Здесь будет фото из машины инструктора<br>Разметка косой парковки на площадке инструктора: линии, конусы и сторона заезда, с которой будете работать вы.</div>
+<p>Когда трогание, остановка у метки и короткое движение назад уже пробовали, инструктор обычно переходит к диагональной парковке. На разных площадках её называют чуть по-разному: диагональная, косая, «заезд в карман под углом». Смысл один: на асфальте размечены места, которые стоят к проезду <strong>не как прямой «гараж» и не как параллельная парковка вдоль края, а под углом</strong>.</p>
+<p>Как именно нарисованы линии, с какой стороны заезд, въезжаете вы носом или (реже) задним ходом — это зависит от вашей площадки. <strong>Точную схему упражнения, сторону заезда и ориентиры покажет инструктор.</strong> Ниже — общая логика, чтобы его слова легли на уже знакомую картинку, а не набор сюрпризов.</p>
+<h3>Что это за упражнение и зачем оно</h3>
+<p>Ты подъезжаешь вдоль ряда «карманов», выбираешь свой и заезжаешь в него так, чтобы машина встала внутри линий, примерно параллельно боковым сторонам кармана, не наехав на углы и не торча наружу так, как скажет инструктор.</p>
+<p>Зачем это на площадке: научиться заранее видеть место, вовремя снизить скорость, вовремя начать крутить руль, вовремя его выпрямить и проверить, как встал. В городе углом тоже иногда паркуются, но сегодня мы не про городские привычки, а про спокойное учебное упражнение на разметке.</p>
+<p>Скорость — всё та же маленькая, обычно первая передача. Никто не просит влететь в карман «как в кино». Чем медленнее и понятнее, тем лучше.</p>
+<h3>Общий порядок</h3>
+<p>Очень схематично попытка выглядит так. Это не догма, а каркас, который инструктор заполнит своими ориентирами.</p>
+<ol><li><strong>Подъезжай к ряду мест медленно</strong>, по прямой, вдоль карманов. Передача — первая. Скорость такая, чтобы успеть смотреть и при необходимости сразу остановиться. Если нужно — заранее притормози ещё на подходе, не у самого въезда.</li><li>Выбери своё место. Смотри не только на «дырку впереди», но и на края: конусы, линии, соседние стойки.</li><li>В точке, которую <strong>покажет инструктор</strong>, почти остановись или очень медленно ползи и <strong>начни крутить руль в сторону кармана</strong>. На сколько оборотов и в какой момент — точные ориентиры покажет инструктор. Он может привязать начало поворота к линии, конусу, стойке двери, зеркалу или краю капота. Не заучивай «чужие» точки из интернета: на вашей разметке и на Focus 2 они могут быть другими.</li><li>Медленно въезжай в карман. Скорость держи сцеплением, почти как на схвате. Смотри, куда едет нос, и поглядывай на боковые линии и конусы. Если сомневаешься — лучше остановиться, чем доворачивать в движении наугад.</li><li>Когда машина уже <strong>встаёт параллельно боковым линиям кармана</strong> (или в том положении, которое назвал инструктор), <strong>выпрями руль</strong>. Если опоздать с выравниванием, машина продолжит дугу и может наехать на дальнюю линию. Если выпрямить слишком рано, карман может «не закрыться», и ты встанешь криво.</li><li>Коротким ползком доедь до места остановки: обычно это передняя граница кармана или метка, которую укажет инструктор. Плавно остановись: на такой скорости — сцепление и тормоз вместе. Затяни ручник, если он так сказал, включи нейтраль.</li></ol>
+<p>Если въезжать нужно задним ходом (так бывает не на всех площадках), логика та же: медленно, смотри в сторону движения, руль в нужный момент, выпрямить вовремя, остановиться. Меняется только направление взгляда и то, какая часть машины входит первой. Это отдельно покажет инструктор, если у вас именно такой вариант.</p>
+<h3>Ориентиры и когда крутить руль</h3>
+<p>Ещё раз честно: <strong>готового универсального «когда конус совпадёт с правым зеркалом — крути на полтора оборота» в этом уроке не будет.</strong> Такие фразы привязаны к конкретной машине, росту водителя, посадке и рисунку разметки. Инструктор покажет ориентиры руками на вашей машине, и именно ими ты будешь пользоваться.</p>
+<p>Что ты можешь подготовить заранее:</p>
+<ul><li>На подходе смотри шире, чем на капот. Тебе нужны и начало кармана, и его дальняя сторона, и свободное место.</li><li>Начало поворота руля почти всегда связано с тем, что определённый ориентир «подошёл» к определённому месту на кузове или в зеркале. Запомни <em>свой</em> ориентир, когда инструктор его назовёт. Если забыл — спроси ещё раз, это не стыдно.</li><li>Пока крутишь руль, скорость должна быть уже маленькой. Крутить руль на ходу сильно и одновременно разгоняться — плохая связка.</li><li>Момент выравнивания руля тоже привязан к картинке: машина уже смотрит вдоль кармана, боковые линии идут примерно одинаково слева и справа (или так, как показал инструктор). Если картинка «кривая» — не дотягивай на авось, остановись и послушай подсказку.</li></ul>
+<p>Если попытка пошла не туда, её можно и нужно прервать. Остановись, включи, если нужно, заднюю или первую — как скажет инструктор — и поправь. Учебная парковка не экзамен «с одного захода».</p>
+<h3>Как проверить, что встал хорошо</h3>
+<p>Когда машина остановилась, не выпрыгивай из неё взглядом сразу к следующей попытке. Проверь положение. Обычно смотрят вот на что (точный «зачёт» на вашей площадке назовёт инструктор):</p>
+<ul><li>машина целиком в кармане, колёса не стоят на линиях, если это запрещено разметкой;</li><li>кузов примерно параллелен боковым сторонам кармана, а не стоит «поперёк» или с сильным перекосом;</li><li>спереди и сзади есть тот запас, который он назвал: не выехал за переднюю границу и не остановился слишком рано, загородив проезд;</li><li>двери (хотя на площадке ты их сейчас можешь не открывать) по смыслу имели бы куда открыться — то есть ты не притёрся вплотную к конусу или стойке;</li><li>конусы и линии целы: ты их не утащил колесом.</li></ul>
+<p>Проверяй зеркалами и поворотом головы, а не только «по ощущению капота». Если встал криво — это информация для следующей попытки: рано или поздно начал крутить, рано или поздно выпрямил, слишком быстро въехал. Одну причину за попытку — и снова.</p>
+<p>После проверки: нейтраль, ручник, как скажет инструктор.</p>
+<h3>Как выехать из кармана</h3>
+<p>Выезд — отдельное короткое упражнение, не «просто газ и налево». Обычно он выглядит так, но <strong>точный порядок и ориентиры снова покажет инструктор</strong>.</p>
+<p>Сначала осмотрись: сзади, сбоку, в зеркала, не едет ли кто по проезду площадки. Затем — трогание нашим методом, очень медленно. Руль начинают крутить уже в ту сторону, которая выводит нос (или корму, если выезжаете назад) в проезд, в момент, который он назовёт. Скорость держи сцеплением. Как только машина вышла из кармана и встала вдоль проезда, руль выпрямляют и останавливаются или едут к следующей попытке — как он скажет.</p>
+<p>Не выезжай сам «как кажется», пока это не объяснили. И не торопись: на выезде так же легко задеть ближний конус, как на въезде.</p>
+<div class="qbox mini-q" id="mq8">
+  <h4>Проверь себя</h4>
+  <p>Откуда брать точный момент, когда начинать крутить руль в «карман»?</p>
+  <div class="opts"><button type="button" data-ok="0">а) Из любой схемы в интернете: ориентиры везде одинаковые</button><button type="button" data-ok="1">б) От инструктора — по вашей машине и вашей разметке</button><button type="button" data-ok="0">в) Крутить можно в любой момент, если ехать быстрее</button></div>
+  <div class="feedback" data-explain="Чужие «магические точки» на другой площадке могут не совпасть. Точные ориентиры покажет инструктор."></div>
+</div>
+<aside class="callout tip"><span class="lbl">Совет инструктора</span>Не запомнился ориентир — спроси ещё раз, это не стыдно. Учебную попытку, которая пошла криво, можно и нужно прервать и поправить, а не «дотягивать на авось».</aside>
+</div></details>
+<details class="block" open id="частые-ошибки-и-как-их-избежать"><summary>Частые ошибки и как их избежать</summary><div class="inner">
+<p><strong>Бьют по тормозу, как по кнопке.</strong> Машина клюёт, метку проскакивают или недоезжают. Лечится нажимом «как на губку»: сначала спокойно, потом добавить или ослабить. Вспомни стакан воды в салоне.</p>
+<p><strong>Смотрят в метку под самым капотом или только на педали.</strong> Тогда линия появляется внезапно. Глаза — вперёд, к месту остановки, с запасом.</p>
+<p><strong>Слишком рано выжимают сцепление</strong> на уже чуть более быстрой короткой прямой и едут к метке на накате. Машина «плывёт», расчёт сбивается. Сначала тормоз, сцепление — когда скорость уже маленькая.</p>
+<p><strong>Слишком поздно выжимают сцепление</strong> на малой скорости — и глохнут у метки. Если ползёшь — можно сразу сцепление и тормоз вместе, как на первом занятии.</p>
+<p><strong>Торопятся назад.</strong> Задняя включена, взгляд ещё в капоте, сцепление брошено. Назад всегда медленнее, чем кажется нужным. Сначала взгляд, потом короткий ползок на схвате.</p>
+<p><strong>Не смотрят в сторону движения назад.</strong> Едут «по зеркалу наугад» или по приборам. Поверни корпус и смотри в заднее стекло, зеркала — в помощь.</p>
+<p><strong>В карман въезжают слишком быстро.</strong> Руль не успевает, конус уже рядом. Перед началом поворота скорость должна быть маленькой.</p>
+<p><strong>Крутят руль слишком рано или слишком поздно.</strong> Ранний поворот обычно срезает ближний угол кармана. Поздний — уносит к дальней линии или оставляет машину снаружи. Запомни ориентир инструктора, а не чужую схему.</p>
+<p><strong>Забывают выпрямить руль</strong> в кармане. Машина продолжает дугу. Как только кузов встал вдоль места — руль в «прямо».</p>
+<p><strong>Паника, если попытка пошла криво.</strong> Остановись. На площадке можно прервать упражнение, поправить и повторить. Это не сломанный экзамен, а тренировка.</p>
+</div></details>
+<details class="block" open id="запомни-главное"><summary>Запомни главное</summary><div class="inner">
+<ul><li>Трогаемся по-прежнему так: сцепление до схвата <strong>без газа</strong>, держим около трёх секунд, затем отпускаем сцепление и мягко добавляем газ.</li><li>Тормоз дозируют: это не «вкл/выкл», а сила нажима, которую можно увеличить или уменьшить. Правая нога — только на одной педали.</li><li>Сегодня по умолчанию тормозим <strong>плавно</strong>, с запасом, и в самом конце чуть отпускаем педаль, чтобы не было тычка.</li><li>На малой скорости, когда уже почти стоим или ползём, <strong>сцепление и тормоз вместе</strong>. Когда едешь чуть увереннее и до остановки ещё есть путь — сначала тормоз, сцепление перед самой остановкой.</li><li>К метке смотри заранее, начинай тормозить раньше, чем «кажется, что пора», и поправляй нажим, а не бей по педали в последний момент.</li><li>Назад: сначала полная остановка, кольцо и схема на рукоятке, взгляд в заднее стекло в сторону движения, очень медленный ползок на схвате, торможение сцеплением и тормозом вместе.</li><li>В диагональной парковке главное — маленькая скорость, вовремя начать поворот, вовремя выпрямить руль и проверить, как встал. <strong>Точные ориентиры покажет инструктор.</strong></li></ul>
+</div></details>
+<h2 id="quiz-h">Проверь себя</h2>
+<p>Выбери один ответ. Это не экзамен в ГАИ, а проверка, что главное зацепилось. После каждого вопроса сразу будет короткое пояснение, а в конце — общий счёт.</p>
+<div id="quiz">
+<div class="qbox quiz-q" data-n="1">
+  <h4>1. Какой ногой нажимают педаль тормоза?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Левой, потому что она ближе к средней педали</button><button type="button" data-ok="1">б) Правой, и в этот момент правая нога не должна оставаться ещё и на газе</button><button type="button" data-ok="0">в) Любой, как удобнее в конкретной попытке</button></div>
+  <div class="feedback" data-explain="Левая нога работает только со сцеплением. Правая — либо газ, либо тормоз, никогда две педали сразу."></div>
+</div>
+<div class="qbox quiz-q" data-n="2">
+  <h4>2. Что такое плавное торможение?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Педаль один раз резко в пол, чтобы точно остановиться</button><button type="button" data-ok="1">б) Нажим нарастает спокойно, силу можно добавить или ослабить, а перед самой остановкой педаль чуть отпускают</button><button type="button" data-ok="0">в) Сначала выжать сцепление и ехать на накате, а тормоз не использовать</button></div>
+  <div class="feedback" data-explain="Плавное торможение — это дозированный нажим, а не удар и не отказ от тормоза."></div>
+</div>
+<div class="qbox quiz-q" data-n="3">
+  <h4>3. Ты почти ползёшь на первой и хочешь остановиться у близкой метки. Как быть со сцеплением?</h4>
+  <div class="opts"><button type="button" data-ok="1">а) Сцепление и тормоз нажать вместе, как на первом занятии при малой скорости</button><button type="button" data-ok="0">б) Тормозить одним тормозом до полной остановки, сцепление не трогать</button><button type="button" data-ok="0">в) Сначала включить нейтраль на ходу, потом жать тормоз</button></div>
+  <div class="feedback" data-explain="На малой скорости, когда уже почти стоим, сцепление и тормоз вместе — чтобы мотор не заглох. Нейтраль на ходу для остановки у метки не нужна."></div>
+</div>
+<div class="qbox quiz-q" data-n="4">
+  <h4>4. Ты уже проехал короткий прямой кусок чуть увереннее и только потом начал тормозить к метке. Когда выжимать сцепление?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Сразу, едва снял ногу с газа, чтобы ехать к метке на накате</button><button type="button" data-ok="1">б) Сначала тормоз, а сцепление — когда скорость уже упала, перед самой остановкой</button><button type="button" data-ok="0">в) Сцепление в этой ситуации вообще не выжимают</button></div>
+  <div class="feedback" data-explain="Сначала тормоз (мотор ещё помогает замедляться), сцепление — в конце, чтобы не заглохнуть. Слишком раннее сцепление даёт накат, и метку ловить труднее."></div>
+</div>
+<div class="qbox quiz-q" data-n="5">
+  <h4>5. Как лучше подъезжать к метке остановки?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Смотреть под капот на саму линию и в последний момент сильно ударить по тормозу</button><button type="button" data-ok="1">б) Смотреть на метку заранее, начать тормозить с запасом и при необходимости добавить или ослабить нажим</button><button type="button" data-ok="0">в) Не тормозить совсем и надеяться, что машина сама остановится на схвате</button></div>
+  <div class="feedback" data-explain="Взгляд вперёд, тормоз с запасом, дозировка. Удар в последний момент и взгляд под капот как раз дают промах."></div>
+</div>
+<div class="qbox quiz-q" data-n="6">
+  <h4>6. Как на большинстве учебных Focus 2 включают заднюю передачу?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) На ходу, резко влево, как первую, без остановок</button><button type="button" data-ok="1">б) После полной остановки: сцепление в пол, по схеме на рукоятке, обычно приподнять кольцо и вести рычаг влево и вперёд, левее первой</button><button type="button" data-ok="0">в) Сначала пятая, потом из неё «через одну» в заднюю</button></div>
+  <div class="feedback" data-explain="Только после полной остановки и по схеме на рычаге. Если фиксатор выглядит иначе — смотри схему и повторяй за инструктором, не угадывай."></div>
+</div>
+<div class="qbox quiz-q" data-n="7">
+  <h4>7. Куда в первую очередь смотреть, когда ползёшь назад на площадке?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Только на приборы и на капот, чтобы не заглохнуть</button><button type="button" data-ok="1">б) В заднее стекло, в сторону движения, повернув корпус; зеркала — в помощь</button><button type="button" data-ok="0">в) Закрыть глаза и довериться сцеплению</button></div>
+  <div class="feedback" data-explain="Ведущий взгляд — туда, куда едешь, то есть назад. Приборы и капот в этот момент не главный ориентир."></div>
+</div>
+<div class="qbox quiz-q" data-n="8">
+  <h4>8. Что чаще всего бывает, если в диагональном «кармане» начать крутить руль слишком рано?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Машина идеально встанет сама, раньше начать — всегда безопаснее</button><button type="button" data-ok="1">б) Обычно срезается ближний угол кармана: можно задеть конус или линию с той стороны, куда повернул</button><button type="button" data-ok="0">в) Руль на парковке крутить не нужно совсем</button></div>
+  <div class="feedback" data-explain="Ранний поворот режет ближний край, поздний уносит к дальнему. Момент поворота привязан к ориентирам, которые покажет инструктор. Если попытка пошла криво — остановись и поправь."></div>
+</div>
+<div class="score" id="quiz-score"></div></div>
+<details class="block" open id="что-сделать-перед-занятием"><summary>Что сделать перед занятием</summary><div class="inner">
+<p>Ещё раз вслух проговори цепочку трогания и два правила остановки: «ползу — сцепление и тормоз вместе» и «уже еду, до метки есть путь — сначала тормоз, сцепление в конце». Вспомни, как на вашей машине включают заднюю: кольцо, схема на рукоятке, только с полной остановки.</p>
+<p>Ориентиры косой парковки зубрировать заранее не нужно: их покажет инструктор на вашей разметке. Достаточно помнить каркас: медленно подъехал, вовремя начал поворот, вовремя выпрямил руль, проверил, как встал.</p>
+<p>Увидимся на площадке. Получится.</p>
+</div></details>
+
+
+<details class="block" open id="istochniki-foto"><summary>Источники фото</summary>
+<div class="inner credits">
+<p>Фото салона — из Wikimedia Commons, с открытой лицензией. Мы использовали европейский Focus Mk2 (2004–2011), не американский Focus 2008–2011.</p>
+<ul>
+<li><strong>Педали и крутилка света.</strong> Кадр из файла <a href="https://commons.wikimedia.org/wiki/File:Dornbirn-Oberhuber_Concierge-Car_Show-Ford_RS-02ASD.jpg">Dornbirn-Oberhuber Concierge-Car Show-Ford RS-02ASD.jpg</a>. Автор: Asurnipal. Focus RS Mk2, то же поколение; спортивные сиденья и шильдик отличаются от учебного 1.6, расположение педалей и панели — как в уроке. Лицензия: <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</li>
+</ul>
+<p>Схемы торможения, взгляда назад, точки схвата и косой парковки нарисованы для этого урока. Крупных открытых фото ноги на тормозе, вида назад из учебного Focus 2 и разметки именно вашей площадки не нашлось — для них оставлены места под фото инструктора.</p>
+</div>
+</details>
+
+
+<footer class="site">Урок 2 · учебный Ford Focus 2, 1.6, механика · <a href="urok-01.html">← Урок 1</a> · <a href="index.html">Все уроки</a></footer>
+</div>
+<script>
+
+(function(){
+  const bar=document.getElementById("bar");
+  function progress(){
+    const h=document.documentElement;
+    const max=h.scrollHeight-h.clientHeight;
+    const p=max>0? (h.scrollTop||window.scrollY)/max : 0;
+    bar.style.width=(Math.min(1,Math.max(0,p))*100)+"%";
+  }
+  window.addEventListener("scroll", progress, {passive:true});
+  progress();
+
+  const STEPS=[
+    {n:"Шаг 1 из 6", t:"Подъезжай медленно вдоль ряда", d:"Первая передача, маленькая скорость, взгляд на выбранный «карман» и на его края: линии, конусы, стойки. Если нужно — притормози ещё на подходе, не у самого въезда."},
+    {n:"Шаг 2 из 6", t:"Подойди к точке начала поворота", d:"В точке, которую покажет инструктор, почти остановись или очень медленно ползи. Точный ориентир — линия, конус, стойка, зеркало или край капота — он назовёт на вашей машине и вашей разметке."},
+    {n:"Шаг 3 из 6", t:"Крути руль в сторону кармана", d:"На сколько оборотов и в какой момент — покажет инструктор. Скорость уже должна быть маленькой. Не крути руль и одновременно не разгоняйся."},
+    {n:"Шаг 4 из 6", t:"Медленно въезжай", d:"Скорость держи сцеплением, почти как на схвате. Смотри, куда едет нос, и поглядывай на боковые линии и конусы. Сомневаешься — лучше остановиться, чем доворачивать наугад."},
+    {n:"Шаг 5 из 6", t:"Выпрями руль", d:"Когда машина встала вдоль боковых линий кармана (или в том положении, которое назвал инструктор) — руль в «прямо». Если опоздать, машина продолжит дугу; если выпрямить слишком рано, можно встать криво."},
+    {n:"Шаг 6 из 6", t:"Остановись и проверь положение", d:"Доедь до места остановки, которое укажет инструктор. На такой скорости — сцепление и тормоз вместе. Проверь: в кармане ли машина, нет ли перекоса, цел ли запас спереди и по краям. Если криво — остановись, поправь, повтори."}
+  ];
+  const body=document.getElementById("step-body");
+  const prev=document.getElementById("step-prev");
+  const next=document.getElementById("step-next");
+  const dots=[...document.querySelectorAll("#stepper .step-dots i")];
+  let step=0;
+  function renderStep(){
+    const s=STEPS[step];
+    body.innerHTML='<div class="step-num">'+s.n+'</div><h3 style="margin:.2rem 0 .4rem">'+s.t+'</h3><p style="margin:0">'+s.d+'</p>';
+    dots.forEach((d,i)=>d.classList.toggle("on", i<=step));
+    prev.disabled=step===0;
+    next.textContent=step===STEPS.length-1?"Сначала":"Дальше";
+  }
+  if(body){
+    prev.addEventListener("click",()=>{if(step>0){step--;renderStep();}});
+    next.addEventListener("click",()=>{step=step===STEPS.length-1?0:step+1;renderStep();});
+    renderStep();
+  }
+
+  function bindChoices(root, onDone){
+    root.querySelectorAll(".qbox").forEach(box=>{
+      const opts=box.querySelectorAll(".opts button");
+      const fb=box.querySelector(".feedback");
+      opts.forEach(btn=>{
+        btn.addEventListener("click",()=>{
+          if(box.dataset.done) return;
+          box.dataset.done="1";
+          const ok=btn.dataset.ok==="1";
+          btn.classList.add(ok?"correct":"wrong");
+          opts.forEach(o=>{
+            o.disabled=true;
+            if(o.dataset.ok==="1") o.classList.add("correct");
+          });
+          fb.className="feedback show "+(ok?"ok":"bad");
+          fb.textContent=(ok?"Верно. ":"Не совсем. ")+(fb.dataset.explain||"");
+          if(onDone) onDone(ok);
+        });
+      });
+    });
+  }
+  bindChoices(document, null);
+
+  const quiz=document.getElementById("quiz");
+  if(quiz){
+    let answered=0, score=0, total=quiz.querySelectorAll(".quiz-q").length;
+    quiz.querySelectorAll(".quiz-q .opts button").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        const box=btn.closest(".quiz-q");
+        if(box.dataset.scored) return;
+        box.dataset.scored="1";
+        answered++;
+        if(btn.dataset.ok==="1") score++;
+        if(answered===total){
+          const el=document.getElementById("quiz-score");
+          const word=score>=7?"Отлично":score>=5?"Хорошо, перечитай слабые места":"Пройди вопросы ещё раз — это нормально";
+          el.className="score show";
+          el.innerHTML="Твой результат<b>"+score+" из "+total+"</b>"+word;
+          el.scrollIntoView({behavior:"instant",block:"center"});
+        }
+      }, true);
+    });
+  }
+})();
+
+</script>
+</body>
+</html>
