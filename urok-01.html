@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Теория к занятию 1: знакомство с учебным Ford Focus 2, трогание, круг и восьмёрка.">
+<title>Урок 1. Знакомство с машиной и первое трогание</title>
+<style>
+
+:root{
+  --navy:#1B365D;
+  --navy-2:#2C5282;
+  --blue:#2B6CB0;
+  --blue-soft:#EBF4FF;
+  --ink:#1A202C;
+  --muted:#4A5568;
+  --bg:#F6F3EE;
+  --card:#FFFFFF;
+  --line:#E2E8F0;
+  --green:#276749;
+  --green-bg:#F0FFF4;
+  --red:#9B2C2C;
+  --red-bg:#FFF5F5;
+  --yellow:#975A16;
+  --yellow-bg:#FFFFF0;
+  --gold:#C05621;
+  --radius:16px;
+  --shadow:0 8px 24px rgba(27,54,93,.08);
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--font);
+  font-size:17px;
+  line-height:1.55;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-text-size-adjust:100%;
+}
+img{max-width:100%;height:auto;display:block}
+button,input{font:inherit}
+.progress{
+  position:fixed;top:0;left:0;right:0;height:5px;background:#E2E8F0;z-index:50;
+}
+.progress span{
+  display:block;height:100%;width:0;background:linear-gradient(90deg,#2B6CB0,#1B365D);
+  transition:width .15s linear;
+}
+.wrap{max-width:42rem;margin:0 auto;padding:1.1rem 1rem 3.5rem}
+header.hero{
+  background:linear-gradient(160deg,#1B365D 0%,#2C5282 70%);
+  color:#fff;
+  padding:1.35rem 1rem 1.5rem;
+  border-radius:0 0 22px 22px;
+  box-shadow:var(--shadow);
+  margin:5px -1rem 1.25rem;
+}
+@media(min-width:42rem){
+  header.hero{margin:5px 0 1.25rem;border-radius:22px}
+}
+.kicker{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85;margin:0 0 .35rem;font-weight:700}
+header.hero h1{font-size:1.7rem;line-height:1.2;margin:0 0 .55rem;letter-spacing:-.02em}
+.meta{font-size:.95rem;opacity:.92;margin:.15rem 0}
+.badge-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem}
+.badge{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);padding:.25rem .6rem;border-radius:999px;font-size:.8rem}
+h2{font-size:1.35rem;line-height:1.25;color:var(--navy);margin:2rem 0 .7rem;padding-bottom:.35rem;border-bottom:2px solid #2C5282}
+h3{font-size:1.12rem;color:var(--navy-2);margin:1.4rem 0 .45rem}
+p{margin:.55rem 0}
+strong{font-weight:700}
+ol,ul{margin:.45rem 0 .8rem;padding-left:1.25rem}
+li{margin:.28rem 0}
+ol{padding-left:1.4rem}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:1rem 1rem 1.05rem;
+  box-shadow:var(--shadow);
+  margin:1rem 0;
+}
+details.block{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  margin:1rem 0;
+  overflow:hidden;
+}
+details.block>summary{
+  cursor:pointer;
+  list-style:none;
+  padding:1rem 1.05rem;
+  font-weight:700;
+  color:var(--navy);
+  font-size:1.05rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+}
+details.block>summary::-webkit-details-marker{display:none}
+details.block>summary::after{
+  content:"";
+  width:.55rem;height:.55rem;
+  border-right:2px solid var(--blue);
+  border-bottom:2px solid var(--blue);
+  transform:rotate(45deg);
+  transition:transform .2s;
+  flex:0 0 auto;
+  margin-top:-.2rem;
+}
+details.block[open]>summary::after{transform:rotate(225deg);margin-top:.2rem}
+details.block .inner{padding:0 1.05rem 1.1rem}
+.callout{
+  border-radius:14px;
+  padding:.85rem 1rem .85rem .95rem;
+  margin:1rem 0;
+  border-left:5px solid var(--blue);
+  background:var(--blue-soft);
+}
+.callout.ok{background:var(--green-bg);border-left-color:var(--green)}
+.callout.warn{background:var(--red-bg);border-left-color:var(--red)}
+.callout.tip{background:#FFF7ED;border-left-color:var(--gold)}
+.callout .lbl{
+  display:block;font-size:.75rem;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:.25rem;color:var(--navy-2)
+}
+.callout.tip .lbl{color:var(--gold)}
+.callout.ok .lbl{color:var(--green)}
+.callout.warn .lbl{color:var(--red)}
+figure.photo,figure.diagram{
+  margin:1rem 0;
+  background:var(--card);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+figure.photo img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#EDF2F7}
+figure.photo.wide img{aspect-ratio:16/10}
+figure.photo.sq img{aspect-ratio:1/1;object-fit:cover}
+figcaption{
+  font-size:.85rem;color:var(--muted);padding:.7rem .9rem .85rem;line-height:1.4
+}
+.ph{
+  margin:1rem 0;
+  border:2px dashed #A0AEC0;
+  background:repeating-linear-gradient(-45deg,#fff,#fff 8px,#F7FAFC 8px,#F7FAFC 16px);
+  border-radius:var(--radius);
+  min-height:8.5rem;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:1.2rem;
+  color:var(--muted);font-size:.95rem;font-weight:600;
+}
+.formula{
+  background:var(--blue-soft);
+  border-radius:14px;
+  padding:.9rem 1rem;
+  font-weight:700;
+  color:var(--navy);
+  margin:1rem 0;
+  line-height:1.45;
+}
+.diagram-box{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:.6rem .5rem .2rem;margin:1rem 0}
+.diagram-box svg{width:100%;height:auto;display:block}
+.diagram-box p.cap{font-size:.85rem;color:var(--muted);padding:.2rem .5rem .7rem;margin:0}
+/* lamps */
+.lamps{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:1rem 0}
+@media(min-width:500px){.lamps{grid-template-columns:repeat(4,1fr)}}
+.lamp{
+  appearance:none;border:2px solid var(--line);background:#fff;border-radius:12px;
+  padding:.55rem .3rem .5rem;cursor:pointer;text-align:center;color:var(--ink);
+  min-height:5.4rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.25rem;
+}
+.lamp:hover,.lamp:focus{border-color:var(--blue);outline:none}
+.lamp[aria-pressed="true"]{border-color:var(--navy);box-shadow:0 0 0 3px rgba(43,108,176,.2)}
+.lamp .ico{width:36px;height:36px}
+.lamp .nm{font-size:.72rem;line-height:1.2;font-weight:650}
+.lamp-panel{
+  display:none;margin:0 0 1rem;border-radius:14px;padding:.9rem 1rem;background:#fff;box-shadow:var(--shadow)
+}
+.lamp-panel.show{display:block}
+.pill{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:.15rem .5rem;border-radius:999px;margin-bottom:.35rem}
+.pill.red{background:#FED7D7;color:var(--red)}
+.pill.yellow{background:#FEFCBF;color:var(--yellow)}
+.pill.green{background:#C6F6D5;color:var(--green)}
+.pill.blue{background:#BEE3F8;color:#2A4365}
+/* stepper */
+.stepper{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem;margin:1rem 0}
+.step-dots{display:flex;gap:.35rem;margin:0 0 .8rem}
+.step-dots i{flex:1;height:6px;border-radius:99px;background:#E2E8F0}
+.step-dots i.on{background:var(--blue)}
+.step-body{min-height:8.5rem}
+.step-num{font-size:.78rem;font-weight:800;color:var(--blue);letter-spacing:.06em;text-transform:uppercase}
+.step-nav{display:flex;gap:.5rem;margin-top:.9rem}
+.step-nav button,.btn{
+  flex:1;border:0;border-radius:12px;padding:.7rem .8rem;font-weight:700;cursor:pointer;
+  background:var(--navy);color:#fff
+}
+.step-nav button[disabled]{opacity:.4;cursor:default}
+.step-nav button.ghost,.btn.ghost{background:#EDF2F7;color:var(--navy)}
+/* quiz / mini */
+.qbox{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem;margin:1.1rem 0}
+.qbox h4{margin:0 0 .65rem;color:var(--navy);font-size:1.02rem}
+.opts{display:flex;flex-direction:column;gap:.4rem}
+.opts button{
+  text-align:left;background:#F7FAFC;border:2px solid var(--line);border-radius:12px;
+  padding:.7rem .8rem;cursor:pointer;color:var(--ink)
+}
+.opts button:hover{border-color:var(--blue)}
+.opts button.correct{background:var(--green-bg);border-color:var(--green);font-weight:700}
+.opts button.wrong{background:var(--red-bg);border-color:#FC8181}
+.opts button[disabled]{cursor:default}
+.feedback{margin:.7rem 0 0;padding:.7rem .8rem;border-radius:12px;display:none;font-size:.95rem}
+.feedback.show{display:block}
+.feedback.ok{background:var(--green-bg);color:var(--green)}
+.feedback.bad{background:var(--red-bg);color:var(--red)}
+.score{
+  background:var(--navy);color:#fff;border-radius:var(--radius);padding:1.1rem 1rem;margin:1rem 0;display:none;text-align:center
+}
+.score.show{display:block}
+.score b{font-size:2rem;display:block;line-height:1.1;margin:.2rem 0}
+.scheme{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  text-align:center;background:#EBF8FF;border-radius:12px;padding:.8rem;font-weight:700;letter-spacing:.2em;color:var(--navy)
+}
+.credits{font-size:.88rem;color:var(--muted)}
+.credits a{color:var(--blue)}
+.credits li{margin:.5rem 0}
+footer.site{font-size:.9rem;color:var(--muted);padding:1.5rem 0 2rem;text-align:center}
+.toc{display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0}
+.toc a{
+  background:#fff;color:var(--navy);text-decoration:none;border-radius:999px;
+  padding:.3rem .7rem;font-size:.82rem;font-weight:650;box-shadow:var(--shadow)
+}
+
+table th,table td{border:1px solid #A0AEC0;padding:.4rem .45rem;vertical-align:top;text-align:left}
+table th{background:#1B365D;color:#fff;font-weight:700}
+table tr.row-red td:nth-child(2){background:#FED7D7;color:#9B2C2C;font-weight:700}
+table tr.row-yellow td:nth-child(2){background:#FEFCBF;color:#975A16;font-weight:700}
+table tr.row-green td:nth-child(2){background:#C6F6D5;color:#276749;font-weight:700}
+table tr.row-blue td:nth-child(2){background:#BEE3F8;color:#2A4365;font-weight:700}
+table tbody tr:nth-child(even) td:not(:nth-child(2)){background:#F7FAFC}
+html{scroll-behavior:auto}
+details.block,h2,h3,#quiz-h,#lamps,#stepper,#quiz{scroll-margin-top:12px}
+.table-hint{font-size:.82rem;color:var(--muted);margin:0 0 .5rem}
+.table-wrap{margin:1rem 0}
+.lamp-table{width:100%;border-collapse:collapse;font-size:.88rem;background:#fff;border-radius:12px}
+@media(max-width:540px){
+  .lamp-table thead{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .lamp-table,.lamp-table tbody,.lamp-table tr,.lamp-table td{display:block;width:100%}
+  .lamp-table tr{margin:0 0 .7rem;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+  .lamp-table td{border:0;border-bottom:1px solid var(--line);padding:.45rem .7rem}
+  .lamp-table td:last-child{border-bottom:0}
+  .lamp-table td::before{content:attr(data-label);display:block;font-size:.75rem;font-weight:700;color:var(--navy);margin:0 0 .15rem;text-transform:uppercase;letter-spacing:.04em}
+  .lamp-table tr.row-red td:nth-child(2),
+  .lamp-table tr.row-yellow td:nth-child(2),
+  .lamp-table tr.row-green td:nth-child(2),
+  .lamp-table tr.row-blue td:nth-child(2){display:flex;align-items:center;gap:.5rem}
+}
+
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"><span id="bar"></span></div>
+<div class="wrap">
+<header class="hero">
+  <p class="kicker">Теоретический курс · Урок 1</p>
+  <h1>Знакомство с машиной и первое трогание</h1>
+  <p class="meta">Учебный автомобиль: Ford Focus 2, двигатель 1.6, механическая коробка передач</p>
+  <p class="meta">Время чтения: около 25 минут</p>
+  <div class="badge-row">
+    <span class="badge">Площадка</span>
+    <span class="badge">Механика</span>
+    <span class="badge">Круг и восьмёрка</span>
+  </div>
+</header>
+<nav class="toc" aria-label="Содержание">
+      <a href="#зачем-этот-урок">Зачем</a>
+      <a href="#как-будет-проходить-занятие">Занятие</a>
+      <a href="#часть-1-сначала-сядь-удобно-и-безопасно">Посадка</a>
+      <a href="#часть-2-всё-что-под-руками-и-перед-глазами">Салон</a>
+      <a href="#часть-3-приборная-панель-что-означают-стрелки-и-лампочки">Приборы</a>
+      <a href="#часть-5-как-тронуться-наш-метод-в-четыре-шага">Трогание</a>
+      <a href="#часть-7-круг-и-восьмёрка">Круг</a>
+      <a href="#quiz-h">Тест</a>
+    </nav>
+<details class="block" open id="зачем-этот-урок"><summary>Зачем этот урок</summary><div class="inner">
+<p>Привет. Это первый урок теории — его стоит спокойно прочитать до занятия на площадке, лучше не «по диагонали», а так, будто инструктор сидит рядом и всё показывает руками.</p>
+<p>На занятии ты впервые сядешь за руль учебного Ford Focus 2 с обычной механической коробкой: передачи переключаешь сам, левой ногой работаешь со сцеплением. В город мы не поедем. Сначала разберёмся, что у тебя под руками и перед глазами, как завести мотор, как тронуться и как остановиться. Потом — медленный круг и восьмёрка.</p>
+<p>Текст написан для человека, который за рулём ещё почти не сидел. Каждую вещь мы «разжёвываем»: как называется, зачем нужна, как пользоваться и что ты при этом почувствуешь.</p>
+<aside class="callout ok"><span class="lbl">Это нормально</span>И самое главное наперёд: <strong>глохнуть на первом занятии — это нормально</strong>. Так делают почти все, и не раз. Инструктор сидит справа, у него есть свои учебные педали, площадка закрытая, никто сзади не сигналит. Твоя задача — не быть идеальным, а спокойно пробовать.</aside>
+</div></details>
+<details class="block" open id="как-будет-проходить-занятие"><summary>Как будет проходить занятие</summary><div class="inner">
+<p>Занятие идёт на учебной площадке. Примерно так:</p>
+<ol><li>Инструктор покажет машину снаружи и внутри и назовёт то, с чем ты будешь работать сегодня.</li><li>Вместе вы настроите сиденье, подголовник, ремень, руль и зеркала. Пока тебе не удобно и ты не видишь то, что нужно видеть, ехать рано.</li><li>Вы пройдётесь по всем органам управления: педали, руль, рычаг коробки, ручник, ключ зажигания, подрулевые рычаги, свет, «аварийка», печка, стёкла, зеркала и приборная панель.</li><li>Инструктор заведёт двигатель и покажет, что происходит на панели. Потом заведёшь ты.</li><li>Несколько раз потренируете трогание и остановку — на месте, без спешки.</li><li>Когда трогание станет чуть увереннее, поедете по кругу, затем по восьмёрке. Скорость маленькая.</li></ol>
+<p>Инструктор будет говорить короткими фразами. Заучивать урок наизусть не нужно: достаточно, чтобы на площадке его слова уже были знакомыми. Если что-то непонятно — спрашивай сразу. Глупых вопросов на первом занятии не бывает.</p>
+</div></details>
+<details class="block" open id="слова-которые-будут-звучать-часто"><summary>Слова, которые будут звучать часто</summary><div class="inner">
+<p>Чтобы потом не спотыкаться, вот короткий словарик.</p>
+<p><strong>Сцепление</strong> — левая педаль. Она как рукопожатие между мотором и колёсами: педаль в пол — они расцеплены; педаль отпущена — мотор снова крутит колёса.</p>
+<p><strong>Нейтраль</strong> (нейтральное положение) — ни одна передача не включена. Рычаг коробки свободно качается влево и вправо посередине. В нейтрали мотор может работать, а машина сама не поедет.</p>
+<p><strong>Передача</strong> — ступень коробки. Первая — для трогания и очень медленной езды, вторая чуть быстрее и так далее. Задняя — чтобы ехать назад.</p>
+<p><strong>Кулиса</strong> — так часто называют рычаг коробки. Для тебя это рукоятка между сиденьями со схемой передач на ней.</p>
+<p><strong>Точка схвата</strong> (её ещё называют моментом схватывания) — положение педали сцепления, в котором мотор только-только начинает «брать» колёса. Машина слегка вздрагивает и может сама поехать совсем медленно. Это самое важное ощущение первого занятия.</p>
+<p><strong>Ручник</strong> (стояночный тормоз) — рычаг между сиденьями. Он держит машину на месте, когда ты уже не нажимаешь педаль тормоза: на стоянке, на уклоне, перед троганием.</p>
+<p><strong>Обороты</strong> — как быстро крутится мотор. Их показывает тахометр. Когда обороты падают слишком низко под нагрузкой, мотор может заглохнуть — как будто велосипед остановили, не снимая тебя с педалей.</p>
+</div></details>
+<details class="block" open id="часть-1-сначала-сядь-удобно-и-безопасно"><summary>Часть 1. Сначала сядь удобно и безопасно</summary><div class="inner">
+<p>Пока сиденье, ремень и зеркала не настроены, за руль «просто сесть и поехать» рано. Удобная посадка — это не комфорт «для красоты». От неё зависит, достанешь ли ты педали до пола, увидишь ли соседей по площадке и не устанешь ли за занятие.</p>
+<h3>Сиденье</h3>
+<p>Сядь так, чтобы спина опиралась на спинку, а не «висела» вперёд. Под сиденьем спереди обычно есть скоба (поперечная ручка). Потяни её вверх и сдвинь сиденье ближе или дальше.</p>
+<p>Как понять, что расстояние правильное: нажми левой ногой педаль сцепления <strong>до пола</strong>. Нога должна быть чуть согнута в колене. Если она совсем прямая, сиденье слишком далеко: ты не выжмешь сцепление до конца, и машина может дёрнуться или заглохнуть. Если колено почти упирается в руль, ты сидишь слишком близко.</p>
+<p>Справа (с внешней стороны подушки сиденья) есть рычаг наклона спинки. Откинь или подними спинку так, чтобы запястья лежали на верхней точке руля, а лопатки при этом не отрывались от сиденья. Руки чуть согнуты в локтях.</p>
+<p>На части Focus 2 есть ещё рычаг высоты сиденья — обычно «насос» сбоку: качаешь вверх или вниз. Если такого рычага нет, ничего страшного: настрой то, что есть. Высоту подбирают так, чтобы хорошо видеть дорогу перед капотом и приборы, а голова не упиралась в потолок.</p>
+<p>Инструктор поможет. Не стесняйся попросить подвинуть сиденье ещё раз: лучше две минуты сейчас, чем всё занятие тянуться к педалям.</p>
+<h3>Подголовник</h3>
+<p>Подголовник — не «подушка для шеи в пробке». Он нужен, чтобы при резкой остановке или ударе сзади голова не опрокинулась назад.</p>
+<p>Потяни подголовник вверх или, чтобы опустить, нажми кнопку сбоку и сдвинь вниз. Правильно, когда затылок приходится примерно на середину подголовника, а не когда подушка стоит у шеи. Держи его близко к голове, не в десяти сантиметрах позади.</p>
+<h3>Ремень безопасности</h3>
+<p>Ремень пристёгивают <strong>до</strong> того, как заводят мотор, и тем более до начала движения.</p>
+<p>Замок ремня — у бедра, ближе к середине машины. Язычок вставляешь до щелчка. Снимаешь нажатием красной кнопки на замке.</p>
+<p>Ремень должен идти по плечу и груди, а внизу — по костям таза, то есть по поясу, а не по мягкому животу. Если лента режет шею или наоборот сползает с плеча, на стойке у двери обычно есть регулятор высоты: кнопку или клавишу зажимаешь и двигаешь якорь ремня вверх или вниз.</p>
+<p>Не прячь ремень под руку, не откидывай за спину и не оставляй слабину. Если лента давит или перекручена, поправь сейчас, не на ходу.</p>
+<h3>Зеркала</h3>
+<p>Зеркала настраивают сидя в той позе, в которой будешь ехать, уже пристегнувшись.</p>
+<p><strong>Салонное зеркало</strong> — в центре, у ветрового стекла. Возьмись за него и поверни так, чтобы в нём было видно заднее стекло целиком, а не потолок и не своё ухо. На части машин снизу у зеркала есть маленький рычажок «день/ночь»: ночью его щёлкают, чтобы свет фар сзади не слепил. Днём рычажок обычно оставляют в положении «день».</p>
+<p><strong>Боковые зеркала</strong> на Focus 2 почти всегда регулируются с двери водителя. На подлокотнике левой двери есть джойстик (кружок, который качается) и переключатель выбора зеркала: L — левое, R — правое. Выбери зеркало, затем джойстиком чуть наклони его.</p>
+<p>Как настроить просто: в левом зеркале ты чуть-чуть видишь край своего автомобиля (ручку или бок) и большой кусок дороги слева и сзади. В правом — так же свой край и дорогу справа-сзади. Если в зеркале одна только твоя дверь, зеркало завалено слишком внутрь. Если машины не видно совсем и только небо, оно завалено слишком вверх.</p>
+<p>«Мёртвая зона» — кусок пространства сбоку, которого не видно ни в одном зеркале. Позже научимся перед манёвром ещё и быстро поворачивать голову. Сегодня главное — чтобы зеркала уже были настроены и ты привык в них взглядывать.</p>
+<div class="qbox mini-q" id="mq1">
+  <h4>Проверь себя</h4>
+  <p>Когда пристёгивают ремень?</p>
+  <div class="opts"><button type="button" data-ok="0">а) После того как завели мотор</button><button type="button" data-ok="1">б) До того, как заводят мотор, и тем более до начала движения</button><button type="button" data-ok="0">в) Только на экзамене в ГАИ</button></div>
+  <div class="feedback" data-explain="Ремень — до запуска и тем более до начала движения. Это не формальность экзамена."></div>
+</div>
+<aside class="callout tip"><span class="lbl">Совет инструктора</span>Не стесняйся попросить подвинуть сиденье ещё раз: лучше две минуты сейчас, чем всё занятие тянуться к педалям.</aside>
+</div></details>
+<details class="block" open id="часть-2-всё-что-под-руками-и-перед-глазами"><summary>Часть 2. Всё, что под руками и перед глазами</summary><div class="inner">
+<figure class="photo">
+  <img src="images/cabin-overview.jpg" alt="Салон европейского Ford Focus 2 Titanium 2005 года: руль, панель, печка, рычаг коробки" loading="lazy" width="1400" height="1050">
+  <figcaption>Общий вид салона европейского Focus 2 (Titanium, 2005, левый руль). На этом экземпляре стоит автомат — у учебной машины рычаг механический, схема передач на рукоятке. Расположение руля, печки, света и приборов такое же.</figcaption>
+</figure><figure class="photo">
+  <img src="images/drivers-view.jpg" alt="Вид с места водителя Focus RS Mk2: крутилка света слева от руля, подрулевой рычаг, педаль, механическая коробка" loading="lazy" width="1400" height="1050">
+  <figcaption>Вид с места водителя Focus RS (то же поколение Mk2). Крутилка света слева на панели, левый подрулевой рычаг, педали и механика — как в уроке. Сиденья и шильдик RS у обычного учебного 1.6 другие.</figcaption>
+</figure>
+<p>Пройдёмся по салону сверху вниз и слева направо. На учебной машине мелочи могут отличаться: где-то есть подогрев сидений или датчик дождя, где-то нет. Если кнопки нет — на этой комплектации её просто не ставили. Инструктор покажет именно вашу машину.</p>
+<h3>Руль, сигнал и регулировка колонки</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 320 230" role="img" aria-label="Руль держат двумя руками в положении девять и три часа">
+  <rect x="8" y="8" width="304" height="214" rx="16" fill="#EBF8FF" stroke="#90CDF4"/>
+  <circle cx="160" cy="120" r="78" fill="#fff" stroke="#1B365D" stroke-width="10"/>
+  <circle cx="160" cy="120" r="22" fill="#2C5282"/>
+  <text x="160" y="124" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" font-family="system-ui,sans-serif">FORD</text>
+  <line x1="160" y1="42" x2="160" y2="58" stroke="#A0AEC0" stroke-width="3"/>
+  <!-- hands at 9 and 3 -->
+  <ellipse cx="82" cy="120" rx="16" ry="22" fill="#E2C8A0" stroke="#1A202C" stroke-width="1"/>
+  <ellipse cx="238" cy="120" rx="16" ry="22" fill="#E2C8A0" stroke="#1A202C" stroke-width="1"/>
+  <text x="82" y="200" text-anchor="middle" font-size="13" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">9 часов</text>
+  <text x="238" y="200" text-anchor="middle" font-size="13" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">3 часа</text>
+  <text x="160" y="36" text-anchor="middle" font-size="13" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">«без десяти два»</text>
+</svg>
+<p class="cap">Две руки на руле, примерно на девяти и на трёх. Большие пальцы — вдоль обода, не в кольцо «насмерть».</p>
+</div>
+<p>Руль держим двумя руками, примерно в положении <strong>«без десяти два»</strong> или <strong>«девять и три»</strong> — как стрелки на часах. Большие пальцы лежат вдоль обода, не в кольцо «насмерть». Так руки меньше устают, и руль удобнее поворачивать.</p>
+<p>Посередине руля (или на накладке ступицы) — <strong>клаксон</strong>, звуковой сигнал. Нажимаешь на эту площадку. Сегодня он почти не понадобится, но место лучше знать сразу.</p>
+<p>Под рулевой колонкой, обычно слева снизу, есть <strong>рычажок фиксации</strong>. Им регулируют положение руля:</p>
+<ol><li>Потяни рычажок вниз (или как покажет инструктор), чтобы колонка «отпустилась».</li><li>Выставь руль по высоте так, чтобы он не закрывал приборы и чтобы руки были чуть согнуты.</li><li>На части Focus 2 руль двигается ещё и ближе-дальше (вылет). Если ваша машина это умеет — используй. Если нет, регулируй только высоту.</li><li>Защёлкни рычажок обратно, покачай руль и убедись, что он зафиксирован. Ехать с незафиксированным рулём нельзя.</li></ol>
+<p>Руль регулируют только на стоящей машине, не на ходу.</p>
+<h3>Педали</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 360 210" role="img" aria-label="Три педали слева направо: сцепление, тормоз, газ. Левая нога на сцеплении, правая только на одной из двух остальных.">
+  <rect x="8" y="8" width="344" height="194" rx="16" fill="#EBF8FF" stroke="#90CDF4"/>
+  <rect x="28" y="36" width="90" height="88" rx="10" fill="#2C5282"/>
+  <rect x="135" y="28" width="90" height="96" rx="10" fill="#9B2C2C"/>
+  <rect x="242" y="48" width="90" height="76" rx="10" fill="#276749"/>
+  <text x="73" y="80" text-anchor="middle" fill="#fff" font-size="15" font-weight="800" font-family="system-ui,sans-serif">Сцепление</text>
+  <text x="73" y="98" text-anchor="middle" fill="#E2E8F0" font-size="11" font-family="system-ui,sans-serif">С</text>
+  <text x="180" y="76" text-anchor="middle" fill="#fff" font-size="15" font-weight="800" font-family="system-ui,sans-serif">Тормоз</text>
+  <text x="180" y="94" text-anchor="middle" fill="#FED7D7" font-size="11" font-family="system-ui,sans-serif">Т</text>
+  <text x="287" y="84" text-anchor="middle" fill="#fff" font-size="15" font-weight="800" font-family="system-ui,sans-serif">Газ</text>
+  <text x="287" y="102" text-anchor="middle" fill="#C6F6D5" font-size="11" font-family="system-ui,sans-serif">Г</text>
+  <text x="73" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">левая нога</text>
+  <line x1="135" y1="160" x2="332" y2="160" stroke="#1B365D" stroke-width="2"/>
+  <text x="233" y="178" text-anchor="middle" font-size="12" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">правая нога — только на одной</text>
+</svg>
+<p class="cap">Слева направо: сцепление, тормоз, газ. Правая нога никогда не стоит на двух педалях сразу.</p>
+</div><div class="ph" role="img" aria-label="Здесь будет фото из машины инструктора">Здесь будет фото из машины инструктора<br>Крупный план всех трёх педалей учебной машины.</div>
+<p>Педалей три. Слева направо:</p>
+<ol><li><strong>Сцепление</strong> — самая левая, для левой ноги.</li><li><strong>Тормоз</strong> — средняя, чуть выше и «жёстче» на вид, только для правой ноги.</li><li><strong>Газ</strong> (акселератор) — самая правая, узкая и более податливая, тоже только для правой ноги.</li></ol>
+<p>Запомни как таблицу умножения: <strong>левая нога работает только со сцеплением. Правая — только с тормозом и газом, и никогда с двумя сразу.</strong> Когда тормозишь — газ отпускаешь. Когда газуешь — с тормоза уходишь.</p>
+<p>Слева от сцепления часто есть площадка-упор для левой ноги. Когда сцепление не нужно, ногу удобно ставить туда, а не держать на весу.</p>
+<p>Сцепление нажимай до пола, уверенно, подушечкой стопы. Тормоз — уверенно, но без удара «со всего размаха». Газ — самое нежное движение, будто нажимаешь на колпачок фломастера.</p>
+<h3>Рычаг коробки (кулиса): схема передач и нейтраль</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 360 230" role="img" aria-label="Схема передач: задняя левее первой, первая влево-вперёд, затем 2, 3, 4, 5">
+  <rect x="8" y="8" width="344" height="214" rx="16" fill="#EBF8FF" stroke="#90CDF4"/>
+  <text x="180" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">Схема передач Focus 2 (5 ступеней)</text>
+  <g font-family="system-ui,sans-serif" font-size="20" font-weight="800" text-anchor="middle" fill="#1B365D">
+    <line x1="78" y1="70" x2="78" y2="100" stroke="#2B6CB0" stroke-width="6" stroke-linecap="round"/>
+    <line x1="78" y1="70" x2="150" y2="70" stroke="#2B6CB0" stroke-width="6" stroke-linecap="round"/>
+    <line x1="150" y1="70" x2="150" y2="150" stroke="#2B6CB0" stroke-width="6" stroke-linecap="round"/>
+    <line x1="220" y1="70" x2="220" y2="150" stroke="#2B6CB0" stroke-width="6" stroke-linecap="round"/>
+    <line x1="150" y1="110" x2="290" y2="110" stroke="#2B6CB0" stroke-width="6" stroke-linecap="round"/>
+    <line x1="290" y1="110" x2="290" y2="70" stroke="#2B6CB0" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="78" cy="70" r="18" fill="#fff" stroke="#1B365D" stroke-width="2.5"/>
+    <circle cx="150" cy="70" r="18" fill="#fff" stroke="#1B365D" stroke-width="2.5"/>
+    <circle cx="150" cy="150" r="18" fill="#fff" stroke="#1B365D" stroke-width="2.5"/>
+    <circle cx="220" cy="70" r="18" fill="#fff" stroke="#1B365D" stroke-width="2.5"/>
+    <circle cx="220" cy="150" r="18" fill="#fff" stroke="#1B365D" stroke-width="2.5"/>
+    <circle cx="290" cy="70" r="18" fill="#fff" stroke="#1B365D" stroke-width="2.5"/>
+    <text x="78" y="76">R</text>
+    <text x="150" y="76">1</text>
+    <text x="150" y="156">2</text>
+    <text x="220" y="76">3</text>
+    <text x="220" y="156">4</text>
+    <text x="290" y="76">5</text>
+  </g>
+  <path d="M78 100 v28" stroke="#C05621" stroke-width="2" stroke-dasharray="3 3" fill="none"/>
+  <text x="78" y="148" text-anchor="middle" font-size="11" font-weight="700" fill="#C05621" font-family="system-ui,sans-serif">подними</text>
+  <text x="78" y="162" text-anchor="middle" font-size="11" font-weight="700" fill="#C05621" font-family="system-ui,sans-serif">кольцо</text>
+  <text x="180" y="200" text-anchor="middle" font-size="12" fill="#4A5568" font-family="system-ui,sans-serif">Нейтраль — посередине, рычаг свободно ходит влево-вправо</text>
+</svg>
+<p class="cap">Заднюю на Focus 2 почти всегда включают так: приподнять кольцо под рукояткой и вести рычаг влево-вперёд. Если схема на рычаге другая — смотри на неё.</p>
+</div><div class="ph" role="img" aria-label="Здесь будет фото из машины инструктора">Здесь будет фото из машины инструктора<br>Крупный план рукоятки 5-ступенчатой коробки учебной машины и кольца задней передачи.</div>
+<p>Рычаг стоит между сиденьями, рядом с ручником. На рукоятке нарисована <strong>схема передач</strong> — всегда сверяйся с ней.</p>
+<p>На учебном Focus 2 с механикой обычно пять передач вперёд и задняя. Типичная схема выглядит так:</p>
+<p>То есть: первая — влево и вперёд; вторая — влево и назад (на себя); третья — из середины вперёд; четвёртая — из середины назад; пятая — вправо и вперёд; <strong>задняя (R)</strong> — ещё левее первой, обычно тоже вперёд.</p>
+<p><strong>Как включить заднюю на Focus 2.</strong> На большинстве таких машин под рукояткой есть кольцо (юбка, «колечко»). Его нужно <strong>приподнять пальцами</strong> и только потом вести рычаг влево и вперёд — левее первой передачи. Кольцо как раз не даёт включить заднюю случайно вместо первой. Если на вашей рукоятке схема или фиксатор выглядят иначе — смотри схему на рычаге и повтори движение за инструктором. Не угадывай.</p>
+<p><strong>Нейтраль</strong> находится посередине, между рядами передач. Как проверить: слегка покачай рычаг влево-вправо. Если он ходит свободно, как в широком пазу, ты в нейтрали. Если рычаг упруго стоит в одном «гнезде» и сам не гуляет, включена какая-то передача.</p>
+<p>Передачу включают спокойно, не ударом. Сцепление при этом выжато в пол — иначе услышишь хруст, и передача может не войти. Если первая не входит, не дави изо всех сил: выжми сцепление ещё раз или коротко верни рычаг в нейтраль и повтори.</p>
+<p>Сегодня почти всё время нам нужна будет <strong>первая</strong>. Заднюю на круге и восьмёрке не включают, если инструктор сам об этом не попросит.</p>
+<h3>Ручник</h3>
+<p>Ручник — рычаг между сиденьями, обычно с кнопкой в торце рукоятки.</p>
+<p>Чтобы <strong>поставить</strong> машину на ручник, потяни рычаг вверх до упора. В комбинации приборов загорится красная контрольная лампа тормоза — машина напоминает: «я на стояночном тормозе».</p>
+<p>Чтобы <strong>снять</strong> ручник: чуть подними рычаг вверх (снимешь нагрузку с кнопки), нажми кнопку в торце и опусти рычаг вниз до конца. Красная лампа должна погаснуть. Если лампа горит, а рычаг уже внизу, скажи инструктору: это уже не «напоминалка», а возможная неисправность тормозов.</p>
+<p>Перед троганием ручник нужно снять. Если забыть, машина не поедет или поползёт тяжело и может заглохнуть. Короткий взгляд на рычаг и на лампу это лечит.</p>
+<h3>Замок зажигания и ключ</h3>
+<p>Замок — справа на рулевой колонке. Ключ вставляется в него и поворачивается. У ключа четыре положения, они щёлкают:</p>
+<ul><li><strong>0</strong> — всё выключено. Ключ можно вынуть. При вынутом ключе может включиться блокировка руля. Если руль «окаменел» и ключ не поворачивается, не дерись с замком: чуть покачай руль влево-вправо и одновременно мягко поворачивай ключ.</li><li><strong>I</strong> — дополнительное оборудование. Зажигание ещё выключено, но уже могут работать радио, прикуриватель, иногда свет. Руль разблокирован.</li><li><strong>II</strong> — зажигание включено. Оживают приборы, на панели загораются контрольные лампы (это самопроверка, чуть позже разберём). Мотор ещё не работает.</li><li><strong>III</strong> — старт. Это положение не удерживают: включился стартер (ты услышишь характерное «вррр»), мотор захватил, и ключ сам пружиной возвращается в <strong>II</strong>. Как только мотор заработал, ключ отпускаешь.</li></ul>
+<p>Очень важное правило: <strong>во время движения ключ не вынимают и зажигание не выключают</strong>. Если вынуть ключ на ходу, руль может заблокироваться, и машина перестанет слушаться.</p>
+<h3>Левый подрулевой рычаг: поворотники и дальний свет</h3>
+<p>Слева за рулём торчит рычажок. Это твой левый подрулевой переключатель.</p>
+<p><strong>Указатели поворота:</strong> рычаг <strong>вниз</strong> — левый поворот; рычаг <strong>вверх</strong> — правый. Когда руль возвращается «прямо», рычажок часто сам щёлкает обратно. Если не щёлкнул — верни его в среднее положение руками. На панели при этом мигает зелёная стрелка, и слышен спокойный щелчок («тиканье»).</p>
+<p>Если сдвинуть рычаг чуть-чуть, только до лёгкого упора, и отпустить, поворотники на многих Focus 2 мигнут три раза — это для смены полосы. На площадке сегодня проще фиксировать рычаг до щелчка.</p>
+<p><strong>Дальний и «моргание».</strong> На Focus 2 ближний и дальний переключают тем же левым рычагом, но уже движением <strong>к себе, к рулю</strong>:</p>
+<ul><li>одно короткое движение к рулю и отпустить — «моргнуть» дальним (сигнал фарами);</li><li>сдвинуть к рулю на две позиции и отпустить — включить дальний свет. Горит синяя лампа на панели. Чтобы выключить дальний, обычно повторяют то же движение.</li></ul>
+<p>Ощущение «одной и двух позиций» лучше один раз сделать руками вместе с инструктором. На дневной площадке дальний почти наверняка не понадобится, но стоит понять, где на рычаге «поворот», а где «свет». Кнопки меню бортового компьютера, если они есть на рычаге, на первом занятии можно не трогать.</p>
+<h3>Переключатель света (крутилка слева на панели)</h3>
+<figure class="photo">
+  <img src="images/light-switch-stalk.jpg" alt="Крутилка наружного света и корректор фар слева от руля, левый подрулевой рычаг" loading="lazy" width="1400" height="1050">
+  <figcaption>То самое место, где новички часто ищут свет и не находят: крутилка слева на панели Focus 2. Рядом корректор фар, выше — левый подрулевой рычаг (поворотники и дальний). Кадр с Focus RS Mk2, блок света такой же, как на обычных версиях.</figcaption>
+</figure>
+<p>Свет фар на большинстве Focus 2 включается <strong>не рычагом, а отдельной крутилкой</strong> слева на панели, около приборной доски. Новички часто ищут свет на подрулевом рычаге и не находят.</p>
+<p>Поворотом рукоятки обычно выбирают:</p>
+<ul><li><strong>0</strong> — свет выключен;</li><li>значок габаритов — горят габаритные огни и подсветка панели;</li><li>значок фар — включён ближний свет (дальний потом уже левым рычагом);</li><li><strong>AUTO</strong> — если такое положение есть, ближний загорается сам, когда становится темно. Для этого зажигание должно быть в положении II. Если AUTO нет, просто пропускаем.</li></ul>
+<p>Рядом часто стоит <strong>корректор фар</strong> — маленькая крутилка с цифрами 0, 1, 2… Она чуть опускает пучок света, чтобы не слепить встречных, когда машина загружена. На площадке с инструктором обычно оставляют <strong>0</strong>.</p>
+<p>Противотуманные фонари чаще всего включают той же рукояткой: её ставят в положение фар и <strong>вытягивают на одну позицию</strong> (задняя «противотуманка») или <strong>на две</strong> (передние). Задняя лампа на панели обычно жёлтая, передние — зелёные. Их включают в туман, снежную муть или сильный дождь, а не «для красоты». На дневной площадке, как правило, не нужны: если не уверен — спроси, не экспериментируй вслепую.</p>
+<p>На части более ранних комплектаций свет может включаться кольцом прямо на левом рычаге. Если у вас именно так — инструктор покажет. Смысл положений тот же: выключено, габариты, фары.</p>
+<h3>Правый подрулевой рычаг: дворники и омыватель</h3>
+<div class="ph" role="img" aria-label="Здесь будет фото из машины инструктора">Здесь будет фото из машины инструктора<br>Крупный план правого подрулевого рычага (дворники и омыватель) учебной машины.</div>
+<p>Справа за рулём — рычаг стеклоочистителей («дворников»). Он работает при включённом зажигании и щёлкает по положениям:</p>
+<ul><li><strong>выключено</strong>;</li><li><strong>один взмах</strong> — щётки пройдут один цикл и остановятся;</li><li><strong>прерывистый режим</strong> — щётки работают с паузой. Паузу (или, если есть датчик дождя, чувствительность) крутят кольцом на рычаге;</li><li><strong>медленно</strong> — постоянная небыстрая работа;</li><li><strong>быстро</strong> — для сильного дождя.</li></ul>
+<p>Инструктор покажет, в какую сторону вести рычаг на вашей машине — вверх или вниз по щелчкам.</p>
+<p><strong>Омыватель лобового стекла</strong> на Focus 2 обычно включается кнопкой на торце этого рычага (или отдельным движением, которое покажет инструктор). Брызгает жидкость, щётки сами делают несколько взмахов и после отпускания ещё чуть подтирают стекло. Не включай омыватель «насухую», если бачок пустой: насос скрежещет, а щётки могут поцарапать стекло.</p>
+<p><strong>Задний дворник</strong> есть на хэтчбеке и универсале (на седане его обычно нет). На Focus 2 его чаще включают, сдвигая правый рычаг <strong>к рулю</strong> на одну позицию. На две позиции к рулю — омыватель заднего стекла. Если включена задняя передача, задний дворник на части машин может включиться сам — не пугайся.</p>
+<h3>Кнопка аварийной сигнализации</h3>
+<p>«Аварийка» — большая кнопка с красным треугольником, обычно в центре панели, над печкой или рядом с магнитолой. При нажатии мигают все указатели поворота сразу, и на панели мигают обе зелёные стрелки.</p>
+<p>Аварийка работает <strong>при любом положении ключа</strong>, даже если зажигание выключено. Её включают при неожиданной остановке, аварии или чтобы предупредить: «я здесь». Запомни, где кнопка. Не нажимай её «на пробу» посреди объяснения — мигание отвлекает.</p>
+<h3>Отопление, вентиляция и обдув стёкол</h3>
+<figure class="photo">
+  <img src="images/heater.jpg" alt="Блок климат-контроля и магнитола в центре панели Focus 2 Titanium" loading="lazy" width="1400" height="1050">
+  <figcaption>Центральная консоль Focus 2 Titanium: магнитола и блок климата. На этой комплектации климат электронный, с кнопками Auto. На многих учебных машинах вместо него стоят три простые крутилки (температура, вентилятор, куда дует) — смысл тот же, инструктор покажет именно вашу.</figcaption>
+</figure>
+<p>В центре панели, ниже магнитолы, стоит блок «печки». На Focus 2 это обычно три круглые рукоятки и несколько кнопок.</p>
+<ul><li><strong>Температура</strong> — от синего (холодный воздух) к красному (тёплый). Тёплый воздух появляется, когда двигатель уже чуть прогрелся. Сразу после запуска из решёток может дуть холодный — это нормально.</li><li><strong>Вентилятор</strong> — скорость обдува: 0 (выключен), затем 1, 2, 3 и иногда 4.</li><li><strong>Распределение воздуха</strong> — куда дуть: в лицо, в лицо и ноги, в ноги, в ноги и на лобовое, только на лобовое («от запотевания»).</li></ul>
+<p><strong>Как отпотеть или отогреть лобовое.</strong> Поставь распределение на стекло, вентилятор — поярче, температуру — в тепло. Если есть кнопка кондиционера (<strong>A/C</strong>), в сырую погоду её полезно включить: кондиционер не только холодильник, он ещё и <strong>сушит</strong> воздух, и стекло отпотевает быстрее.</p>
+<p>Кнопка <strong>рециркуляции</strong> (часто значок машины со стрелкой по кругу) гоняет воздух по салону, не забирая новый с улицы. Это хорошо, если снаружи пыль или выхлоп. Но если стёкла потеют, рециркуляцию лучше выключить: иначе влажный воздух из салона ещё больше оседает на стекле.</p>
+<p><strong>Обогрев заднего стекла</strong> — кнопка с прямоугольником и пунктирными стрелками. Включается при зажигании в положении II, в кнопке загорается лампочка, через какое-то время часто выключается сама. Не три нити обогрева изнутри скребком.</p>
+<p>На части Focus 2 есть ещё <strong>обогрев лобового стекла</strong> и крутилки подогрева сидений. Если они есть — инструктор покажет. На первом занятии достаточно, чтобы тебе не было душно и чтобы лобовое было прозрачным. Воздух выходит из решёток по центру и по краям панели; рычажком в решётке можно направить поток или прикрыть его.</p>
+<h3>Стёкла и зеркала на двери водителя</h3>
+<p>На подлокотнике левой двери обычно такой набор:</p>
+<ul><li>клавиши стеклоподъёмников: одна — твоё окно, остальные — остальные двери (если стёкла электрические);</li><li>кнопка блокировки задних стеклоподъёмников — сегодня можно не трогать;</li><li>блок настройки боковых зеркал: выбор L/R и джойстик, о котором мы уже говорили.</li></ul>
+<p>Если идёт дождь или инструктор просит закрыть окно, закрывай до конца. Если вместо клавиш стоят обычные ручки — крути их руками, так бывает на части учебных машин.</p>
+<h3>Что ещё можно увидеть и потрогать с места водителя</h3>
+<p>Коротко, чтобы в салоне не осталось таинственных вещей:</p>
+<ul><li><strong>Ручка двери и кнопка замка</strong>, кнопка центрального замка — открыть и закрыть все двери.</li><li><strong>Плафон</strong> на потолке: выключен, всегда горит или загорается при открытии двери.</li><li><strong>Козырьки</strong> от солнца — откидываются вниз, иногда ещё и вбок.</li><li><strong>Бардачок</strong> — ящичек перед пассажиром. На площадке нам не нужен.</li><li><strong>Прикуриватель / розетка 12 В</strong> — в центральной консоли. Для урока не понадобится.</li><li><strong>Рычаг открытия капота</strong> — обычно слева внизу, у ног водителя, под панелью. На этом занятии капот не открываем.</li><li><strong>Магнитола</strong> — по центру. Звук лучше выключить или держать тихим: нужно слышать мотор, инструктора и щелчки поворотников.</li><li>Если есть <strong>кнопка ESP</strong> (значок машины в заносе) — на первом занятии её не нажимаем. Система стабилизации, если она есть, пусть остаётся включённой.</li><li>Учебные <strong>педали инструктора</strong> справа, в ногах у пассажира. Ты их не трогаешь. Если инструктор нажмёт свой тормоз, машина остановится — так и задумано.</li></ul>
+<div class="qbox mini-q" id="mq2">
+  <h4>Проверь себя</h4>
+  <p>Какой ногой работают с педалью сцепления?</p>
+  <div class="opts"><button type="button" data-ok="0">а) Правой</button><button type="button" data-ok="1">б) Левой</button><button type="button" data-ok="0">в) Любой</button></div>
+  <div class="feedback" data-explain="Левая — только сцепление. Правая — только тормоз или газ, никогда оба сразу."></div>
+</div>
+</div></details>
+<details class="block" open id="часть-3-приборная-панель-что-означают-стрелки-и-лампочки"><summary>Часть 3. Приборная панель: что означают стрелки и лампочки</summary><div class="inner">
+<figure class="photo">
+  <img src="images/cluster.jpg" alt="Комбинация приборов Focus 2: тахометр слева, спидометр справа, сверху температура и топливо, по центру дисплей пробега" loading="lazy" width="1400" height="1050">
+  <figcaption>Приборы Focus 2 (рестайлинг, 2009). Слева тахометр (тыс. об/мин), справа спидометр (км/ч), сверху температура и топливо, по центру окошко пробега. Именно та картинка, о которой говорится в уроке.</figcaption>
+</figure>
+<p>Перед тобой, за рулём, — комбинация приборов. На Focus 2 обычно два больших круглых циферблата и несколько указателей и окошек между ними.</p>
+<h3>Спидометр, тахометр, топливо, температура и пробег</h3>
+
+<p><strong>Спидометр</strong> показывает скорость в километрах в час. Это большой циферблат, чаще справа. Сегодня мы едем очень медленно, стрелка может почти не отойти от нуля — так и должно быть. Смотри в первую очередь на дорогу, на спидометр — коротким взглядом.</p>
+<p><strong>Тахометр</strong> — второй большой циферблат, чаще слева. Он показывает обороты двигателя, обычно в тысячах: «2» — это две тысячи оборотов в минуту. Когда ты подводишь сцепление к точке схвата, стрелка часто чуть <strong>опускается</strong>, а звук мотора становится чуть ниже и «тяжелее». Это один из признаков схвата. Если стрелка падает очень низко и мотор начинает дрожать, чуть дожми сцепление обратно, дай мотору «вздохнуть». Красная зона на тахометре — слишком высокие обороты. Сегодня мы туда не попадём: газуем мало и спокойно.</p>
+<p>Рядом живут два маленьких указателя.</p>
+<p><strong>Топливо</strong> — значок колонки. <strong>F</strong> или полная шкала — бак ближе к полному, <strong>E</strong> или пустая шкала — к пустому. Привыкай взглянуть на указатель до занятия. Если стрелка у пустой зоны или горит жёлтая лампа колонки — скажи инструктору. Маленькая стрелочка у пистолета на значке часто подсказывает, с какой стороны лючок бака.</p>
+<p><strong>Температура охлаждающей жидкости</strong> — значок термометра. Сразу после запуска стрелка может сидеть внизу: мотор ещё холодный. По мере прогрева она поднимается к середине — это рабочая зона. Если стрелка уходит в красную зону или загорается красная лампа перегрева, мотор слишком горячий. Тогда останавливаемся, глушим (как скажет инструктор) и <strong>не открываем сразу крышку радиатора</strong>: оттуда может ударить кипятком.</p>
+<p>В маленьком окошке горят цифры пробега. <strong>Одометр</strong> — общий пробег машины, большое число, которое обычно нельзя обнулить. <strong>Суточный пробег</strong> (trip) — маленький счётчик, который можно сбросить: удобно понять, сколько проехали сегодня. Переключают и сбрасывают их обычно кнопкой на комбинации приборов или на подрулевом рычаге: короткое нажатие меняет окошко, нажатие с удержанием обнуляет суточный пробег.</p>
+<h3>Контрольные лампы: сначала про цвета</h3>
+<figure class="photo">
+  <img src="images/cluster-lights.jpg" alt="Горящие контрольные лампы на комбинации приборов Focus 2 при включении зажигания" loading="lazy" width="1400" height="1050">
+  <figcaption>Самопроверка: ключ в положении II, лампы вспыхнули. На фото европейский Focus 2 (2008). Видны маслёнка, аккумулятор, тормоза, Check Engine, ремень, топливо, ESP и другие значки. После запуска мотора большая часть должна погаснуть.</figcaption>
+</figure><div class="lamps" id="lamps"></div>
+<div class="lamp-panel" id="lamp-panel" role="status"></div>
+<p>Когда поворачиваешь ключ в положение <strong>II</strong>, на панели на секунды вспыхивает сразу много лампочек. Это не поломка, это <strong>самопроверка</strong>: машина проверяет, что лампы живы. После запуска мотора большая часть из них должна <strong>погаснуть</strong>.</p>
+<p>Запоминать нужно не сотню картинок сразу, а правило цветов:</p>
+<ul><li><strong>Красный</strong> — серьёзно. Либо ты не пристёгнут / затянут ручник (это напоминание), либо что-то требует остановки. Красную лампу, которая осталась гореть после запуска и снятия ручника, игнорировать нельзя.</li><li><strong>Жёлтый</strong> (оранжевый, янтарный) — внимание. Система просит проверить себя. Часто на площадку доехать можно, но инструктору сказать нужно. Если жёлтая лампа ещё и мигает, а мотор работает рывками — это уже срочнее.</li><li><strong>Зелёный</strong> — информация: что-то включено и работает штатно (поворотник, часто ближний свет или передние противотуманки).</li><li><strong>Синий</strong> — включён дальний свет. Днём он слепит встречных, поэтому если синяя лампа горит случайно — выключи дальний.</li></ul>
+<p>Ниже — самые частые значки на Focus 2. Вызубрить все за вечер не нужно: прочитай, чтобы картинка была знакомой. Если после запуска горит лампа не из списка, не гадай — скажи инструктору.</p>
+<div class="table-wrap"><p class="table-hint">На узком экране каждая лампа — отдельная карточка. Можно также нажать значок выше.</p><table class="lamp-table"><thead><tr><th>Значок</th><th>Цвет</th><th>Что означает</th><th>Что тебе делать</th></tr></thead><tbody><tr class="row-red"><td data-label="Значок">Маслёнка</td><td data-label="Цвет">Красный</td><td data-label="Что означает">Упало давление масла, мотор может быстро пострадать</td><td data-label="Что тебе делать">Остановись, выжми сцепление, затормози, заглуши, скажи инструктору. Дальше не едем «на минуточку»</td></tr><tr class="row-red"><td data-label="Значок">Аккумулятор («+» и «−»)</td><td data-label="Цвет">Красный</td><td data-label="Что означает">Генератор не заряжает батарею</td><td data-label="Что тебе делать">Скажи инструктору. Оставлять «на потом» нельзя: может сесть электрика</td></tr><tr class="row-red"><td data-label="Значок">Восклицательный знак в круге, иногда с P</td><td data-label="Цвет">Красный</td><td data-label="Что означает">Ручник или система тормозов</td><td data-label="Что тебе делать">Если ручник поднят — так и должно гореть. Если уже снят, а лампа горит (тем более вместе с ABS) — не едем, зовём инструктора</td></tr><tr class="row-red"><td data-label="Значок">Человечек с «мешком»</td><td data-label="Цвет">Красный</td><td data-label="Что означает">Неисправность подушки безопасности</td><td data-label="Что тебе делать">Решение на площадке принимает инструктор, но это неисправность, её нельзя «подождать»</td></tr><tr class="row-red"><td data-label="Значок">Человечек с ремнём</td><td data-label="Цвет">Красный</td><td data-label="Что означает">Обычно просто не пристёгнут</td><td data-label="Что тебе делать">Пристегнись. Если ремень защёлкнут, а лампа всё равно горит — скажи инструктору</td></tr><tr class="row-red"><td data-label="Значок">Термометр, иногда с волнами</td><td data-label="Цвет">Красный</td><td data-label="Что означает">Перегрев двигателя</td><td data-label="Что тебе делать">Останавливаемся, глушим, как скажет инструктор. Крышку горячего радиатора сразу не открываем</td></tr><tr class="row-red"><td data-label="Значок">Схематичная машина с открытой дверцей</td><td data-label="Цвет">Красный (если есть)</td><td data-label="Что означает">Открыта дверь, иногда багажник или капот</td><td data-label="Что тебе делать">Проверь двери. На ходу с открытой дверью не едем</td></tr><tr class="row-yellow"><td data-label="Значок">Контур мотора (Check Engine)</td><td data-label="Цвет">Жёлтый</td><td data-label="Что означает">Электроника заметила неисправность</td><td data-label="Что тебе делать">Горит ровно, мотор работает ровно — скажи инструктору, не паникуй. Если лампа мигает, а мотор троит — не газуем сильно и сразу говорим инструктору</td></tr><tr class="row-yellow"><td data-label="Значок">Буквы ABS</td><td data-label="Цвет">Жёлтый</td><td data-label="Что означает">Антиблокировочная система тормозов неисправна</td><td data-label="Что тебе делать">Обычные тормоза чаще всего работают, но на скользком колесо может пойти юзом. Скажи инструктору</td></tr><tr class="row-yellow"><td data-label="Значок">Машина с извилистыми следами, иногда ESP / ESP OFF</td><td data-label="Цвет">Жёлтый (если есть)</td><td data-label="Что означает">Система стабилизации сработала, выключена или неисправна</td><td data-label="Что тебе делать">Коротко мигнула на скользком — штатно. Горит постоянно — скажи инструктору. На первом занятии ESP не выключаем</td></tr><tr class="row-yellow"><td data-label="Значок">Колонка</td><td data-label="Цвет">Жёлтый</td><td data-label="Что означает">Мало топлива</td><td data-label="Что тебе делать">Скажи инструктору</td></tr><tr class="row-yellow"><td data-label="Значок">Фонарь с волнистыми линиями</td><td data-label="Цвет">Жёлтый</td><td data-label="Что означает">Включена задняя противотуманка</td><td data-label="Что тебе делать">Это не поломка, а индикатор. Днём её не держат включённой «на всякий случай»: слепит тех, кто сзади</td></tr><tr class="row-green"><td data-label="Значок">Две стрелки</td><td data-label="Цвет">Зелёный</td><td data-label="Что означает">Включён поворотник или аварийка</td><td data-label="Что тебе делать">Мигают вместе с «тиканьем». Если стрелка моргает после поворота — выключи рычаг</td></tr><tr class="row-green"><td data-label="Значок">Значок фар или габаритов</td><td data-label="Цвет">Зелёный (на части панелей)</td><td data-label="Что означает">Включён ближний свет или габариты</td><td data-label="Что тебе делать">Напоминание, что свет включён</td></tr><tr class="row-green"><td data-label="Значок">Фара с волной</td><td data-label="Цвет">Зелёный</td><td data-label="Что означает">Включены передние противотуманки</td><td data-label="Что тебе делать">Индикатор включения</td></tr><tr class="row-blue"><td data-label="Значок">Синяя фара</td><td data-label="Цвет">Синий</td><td data-label="Что означает">Включён дальний свет</td><td data-label="Что тебе делать">Если загорелся случайно — выключи левым рычагом</td></tr></tbody></table></div>
+<div class="qbox mini-q" id="mq3">
+  <h4>Проверь себя</h4>
+  <p>После запуска мотора на панели осталась гореть красная лампа, ручник уже снят. Что делать?</p>
+  <div class="opts"><button type="button" data-ok="0">а) Ехать дальше: красные лампы так и должны гореть</button><button type="button" data-ok="1">б) Остановиться и сразу сказать инструктору</button><button type="button" data-ok="0">в) Не обращать внимания: это подсветка</button></div>
+  <div class="feedback" data-explain="Красный цвет — серьёзно. Игнорировать такую лампу нельзя."></div>
+</div>
+</div></details>
+<details class="block" open id="часть-4-как-завести-двигатель"><summary>Часть 4. Как завести двигатель</summary><div class="inner">
+<p>Когда посадка, ремень и зеркала готовы, можно оживлять машину. Делаем по шагам, не торопясь.</p>
+<ol><li>Проверь, что <strong>ручник поднят</strong>.</li><li>Проверь, что коробка в <strong>нейтрали</strong>: рычаг свободно ходит влево-вправо посередине.</li><li>Выжми <strong>сцепление в пол</strong> и держи. Это хорошая привычка: даже если ты случайно оставил передачу, машина не прыгнет вперёд, когда заработает стартер.</li><li>Вставь ключ и поверни в положение <strong>II</strong>. Посмотри на панель: лампы вспыхнули. Это самопроверка.</li><li>Поверни ключ в <strong>III</strong> и сразу слушай мотор. Как только он заработал ровно (обычно это одна-две секунды), <strong>отпусти ключ</strong> — он сам вернётся в II.</li><li>Посмотри на панель: красные лампы масла и зарядки должны погаснуть. Ремень, если ты пристёгнут, тоже. Лампа ручника останется гореть, пока ручник поднят — это нормально.</li><li>Не нажимай газ «с разбега» сразу после запуска. Дай мотору секунду-другую поработать спокойно.</li></ol>
+<p>Если мотор не запустился с первой попытки, не крути стартер долго. Верни ключ в II, выдохни, через несколько секунд повтори. Если снова нет — инструктор подхватит. Если руль заблокирован и ключ не поворачивается — покачай руль и одновременно поворачивай ключ.</p>
+<aside class="callout tip"><span class="lbl">Совет инструктора</span>Если руль «окаменел» и ключ не поворачивается — не дерись с замком: чуть покачай руль и одновременно мягко поворачивай ключ.</aside>
+</div></details>
+<details class="block" open id="часть-5-как-тронуться-наш-метод-в-четыре-шага"><summary>Часть 5. Как тронуться: наш метод в четыре шага</summary><div class="inner">
+<div class="stepper" id="stepper" data-step="0">
+  <div class="step-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+  <div class="step-body" id="step-body"></div>
+  <div class="step-nav">
+    <button type="button" class="ghost" id="step-prev" disabled>Назад</button>
+    <button type="button" id="step-next">Дальше</button>
+  </div>
+</div><div class="diagram-box">
+<svg viewBox="0 0 360 160" role="img" aria-label="Ход педали сцепления: от пола через точку схвата до полностью отпущенной">
+  <rect x="8" y="8" width="344" height="144" rx="16" fill="#EBF8FF" stroke="#90CDF4"/>
+  <text x="180" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">Ход педали сцепления</text>
+  <rect x="30" y="70" width="300" height="18" rx="9" fill="#CBD5E0"/>
+  <rect x="30" y="70" width="90" height="18" rx="9" fill="#2C5282"/>
+  <rect x="150" y="66" width="70" height="26" rx="8" fill="#C05621"/>
+  <text x="75" y="84" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="system-ui,sans-serif">в пол</text>
+  <text x="185" y="84" text-anchor="middle" fill="#fff" font-size="10" font-weight="800" font-family="system-ui,sans-serif">схват</text>
+  <text x="300" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">отпущено</text>
+  <text x="180" y="118" text-anchor="middle" font-size="11" fill="#4A5568" font-family="system-ui,sans-serif">Поймай оранжевую зону и подержи</text>
+  <text x="180" y="134" text-anchor="middle" font-size="11" fill="#4A5568" font-family="system-ui,sans-serif">около 3 секунд — без газа</text>
+</svg>
+<p class="cap">Точку схвата не видно глазами: её чувствуют. Кузов чуть вздрагивает, звук мотора становится чуть ниже, стрелка тахометра чуть падает.</p>
+</div>
+<p>Это сердце первого занятия. Мы трогаемся <strong>без газа до точки схвата</strong>. Так ты научишься чувствовать педаль, и машина поведёт себя спокойнее, чем если сразу мешать сцепление и газ.</p>
+<p>Сначала ещё раз проверь: ремень застёгнут, нейтраль, мотор работает, площадка впереди свободная. Дальше — только эти шаги, в этом порядке.</p>
+<ol><li>Выжми <strong>сцепление до пола</strong> и включи <strong>первую передачу</strong>. Рычаг уйдёт влево и вперёд (сверься со схемой). Он должен встать в гнездо, а не остаться болтаться в нейтрали.</li><li><strong>Сними ручник</strong>: чуть вверх, кнопка, вниз до конца. Красная лампа ручника гаснет. Правая нога может спокойно держаться на тормозе, пока сцепление ещё в полу — так машина точно никуда не покатится раньше времени. Затем тормоз отпускаешь.</li><li>Плавно, не бросая, <strong>поднимай левую ногу</strong>, отпуская сцепление, пока не почувствуешь <strong>точку схвата</strong>. Газ пока не трогай совсем.</li><li>Поймай эту точку и <strong>подержи сцепление примерно три секунды</strong>. Машина сама начнёт очень медленно ползти вперёд — это называется «ползти на схвате». Потом плавно отпусти сцепление уже до конца и <strong>мягко добавь газ</strong>.</li></ol>
+<p>Ещё раз, короткой строкой, чтобы запомнилось телом:</p>
+<p class="formula"><strong>сцепление в пол → первая → снять ручник → подвести сцепление до схвата без газа → подержать около трёх секунд → отпустить сцепление до конца и мягко добавить газ.</strong></p>
+<h3>Что такое точка схвата и как её узнать</h3>
+<p>Точку схвата не видно глазами на педали: её <strong>чувствуют</strong>. У каждого автомобиля она чуть в другом месте хода педали, поэтому учебный Focus нужно прочувствовать именно ногами, а не «по теории на три пальца».</p>
+<p>Обычно в точке схвата происходит сразу несколько вещей, не обязательно все сразу:</p>
+<ul><li>кузов чуть вздрагивает или «подбирается», будто машина на мгновение взволновалась;</li><li>звук мотора становится чуть ниже, гуще, как будто ему дали небольшую ношу;</li><li>стрелка тахометра чуть падает;</li><li>в самой педали появляется небольшое дополнительное сопротивление, «упругость»;</li><li>если площадка ровная, машина начинает едва ползти вперёд даже без газа. На холостых оборотах учебного Focus 1.6 этого обычно хватает.</li></ul>
+<p>Если ты отпустил сцепление совсем чуть-чуть и ничего не происходит — ты ещё не дошёл до схвата. Продолжай очень медленно поднимать ногу.</p>
+<p>Если ты проскочил схват и педаль «выпрыгнула» вверх, мотор резко получил всю нагрузку, машина дёрнется и часто <strong>глохнет</strong>. Это не поломка и не оценка «двойка». Это просто слишком быстрое движение ногой.</p>
+<p>Поэтому первые разы делай движение сцепления нарочно медленнее, чем кажется нужным. Три секунды на схвате как раз для этого: ты подтверждаешь себе: «да, я её поймал, машина уже едет», и только потом отпускаешь педаль совсем.</p>
+<h3>Почему сначала без газа</h3>
+<p>Газ даёт мотору больше силы. Когда человек в первый раз одновременно и газ добавляет, и сцепление отпускает, рук и ног как будто не хватает: то газа слишком много (машина прыгает), то слишком мало (глохнет), то сцепление брошено.</p>
+<p>Мы убираем одну задачу. Мотор на холостых оборотах уже умеет медленно повезти машину, если схват пойман. Ты учишься только одной педали. Газ добавляется позже, уже когда машина ползёт и сцепление можно отпускать до конца. Тогда газ — это мягкое «помоги мотору ехать чуть увереннее», а не попытка «вылечить» брошенное сцепление.</p>
+<h3>Если машина заглохла</h3>
+<p>Заглохнуть — значит, мотор остановился. Звук пропал, кузов может дрогнуть, на панели снова вспыхнут лампы. Это выглядит громче, чем есть на самом деле.</p>
+<p>Почему так бывает чаще всего:</p>
+<ul><li>сцепление отпустили слишком быстро и проскочили точку схвата;</li><li>забыли снять ручник;</li><li>передача включилась не до конца, или её не было вовсе, а потом включили с рывком;</li><li>на схвате слишком надолго «передержали» педаль в тяжёлом положении, обороты упали, и мотор не вытянул.</li></ul>
+<p>Что делать — спокойно, без суеты, по одному:</p>
+<ol><li>Выжми <strong>сцепление в пол</strong>.</li><li>Нажми <strong>тормоз</strong> правой ногой, чтобы машина точно стояла.</li><li>Поставь рычаг в <strong>нейтраль</strong> (покачай влево-вправо).</li><li>Когда убедился, что стоишь и нейтраль есть, заведи мотор снова — как в части про запуск: сцепление в полу, ключ в III, отпустить.</li></ol>
+<p>Не нужно сразу топтать газ «чтобы ожить». Не нужно выходить из машины. Не нужно извиняться десять раз: инструктор это видел сотни раз. Выдохнул — и с начала, с первого шага.</p>
+<div class="qbox mini-q" id="mq5">
+  <h4>Проверь себя</h4>
+  <p>Когда по нашему методу добавляют газ?</p>
+  <div class="opts"><button type="button" data-ok="0">а) Сразу, едва начиная отпускать сцепление с пола</button><button type="button" data-ok="1">б) После схвата и паузы около трёх секунд</button><button type="button" data-ok="0">в) До снятия ручника</button></div>
+  <div class="feedback" data-explain="Сначала ловим схват без газа и держим около трёх секунд. Газ — мягко и позже."></div>
+</div>
+<aside class="callout tip"><span class="lbl">Совет инструктора</span>Заглохла — это не провал. Спокойно: сцепление в пол, тормоз, нейтраль, заведи снова. Никто сзади не сигналит, площадка закрытая.</aside>
+</div></details>
+<details class="block" open id="часть-6-как-остановиться-на-малой-скорости"><summary>Часть 6. Как остановиться на малой скорости</summary><div class="inner">
+<p>На площадке мы едем медленно. Для такой езды запомни простой способ остановки:</p>
+<p class="formula"><strong>сцепление и тормоз нажимают вместе.</strong></p>
+<p>То есть: левая нога — сцепление в пол, правая — тормоз. Машина останавливается, мотор продолжает работать.</p>
+<p>Почему вместе, а не «только тормоз»? Если на малой скорости в первой передаче нажать один только тормоз и не выключить сцепление, колёса почти встанут, а мотор через коробку всё ещё будет связан с ними. Обороты упадут, и мотор часто заглохнет — как велосипед, который остановили, не снимая ног с педалей. Сцепление как раз и «расцепляет» мотор с колёсами, чтобы он мог спокойно продолжать работать, пока ты тормозишь.</p>
+<p>Когда машина полностью остановилась:</p>
+<ul><li>держи сцепление и тормоз;</li><li>если нужно постоять дольше, включи нейтраль, затем плавно отпусти сцепление, а тормоз держи (или затяни ручник и сними ноги с педалей — как скажет инструктор).</li></ul>
+<p>Пока учимся, после остановки обычно оставляем сцепление нажатым, проверяем, что точно стоим, и только потом думаем о следующем трогании.</p>
+<p>Тормоз нажимай уверенно, но без удара. Представь, что в салоне стоит стакан воды — останавливаемся так, чтобы он не упал.</p>
+<p>Позже, на более высоких скоростях, порядок торможения будет чуть другим (сначала тормоз, сцепление — перед самой остановкой). Это не тема сегодняшнего дня. Сегодня, на круге и восьмёрке, действует правило: <strong>малая скорость — сцепление и тормоз вместе</strong>.</p>
+<aside class="callout tip"><span class="lbl">Совет инструктора</span>Представь, что в салоне стоит стакан воды — останавливаемся так, чтобы он не упал. Сегодня, на малой скорости: сцепление и тормоз вместе.</aside>
+</div></details>
+<details class="block" open id="часть-7-круг-и-восьмёрка"><summary>Часть 7. Круг и восьмёрка</summary><div class="inner">
+<p>Когда трогание и остановка хотя бы несколько раз получились, инструктор предложит ехать по кругу, затем по восьмёрке. Это всё ещё площадка, всё ещё малая скорость, всё ещё первая передача. Никто не просит «ехать красиво». Нужно научиться смотреть туда, куда едешь, и держать скорость ровной.</p>
+<h3>Круг</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 320 250" role="img" aria-label="Круг: смотри вперёд по дуге, а не на капот">
+  <rect x="8" y="8" width="304" height="234" rx="16" fill="#EBF8FF" stroke="#90CDF4"/>
+  <ellipse cx="160" cy="130" rx="100" ry="78" fill="none" stroke="#2B6CB0" stroke-width="6"/>
+  <!-- car at bottom of circle -->
+  <rect x="148" y="196" width="24" height="16" rx="3" fill="#1B365D" transform="rotate(-8 160 204)"/>
+  <!-- gaze ahead along the path to the right -->
+  <path d="M175 198 Q 230 190 248 150" fill="none" stroke="#C05621" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <polygon points="248,150 236,152 242,140" fill="#C05621"/>
+  <circle cx="248" cy="128" r="10" fill="#FFF7ED" stroke="#C05621" stroke-width="2"/>
+  <text x="248" y="132" text-anchor="middle" font-size="11" font-family="system-ui,sans-serif">👁</text>
+  <text x="160" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">Круг: взгляд — туда, куда едешь</text>
+  <text x="160" y="218" text-anchor="middle" font-size="11" fill="#4A5568" font-family="system-ui,sans-serif">Не на капот и не на педали —</text>
+  <text x="160" y="234" text-anchor="middle" font-size="11" fill="#4A5568" font-family="system-ui,sans-serif">на 2–3 корпуса вперёд по дуге</text>
+</svg>
+<p class="cap">Если смотреть под колёса, машина «плывёт» туда, куда ушёл взгляд, и круг становится корявым.</p>
+</div>
+<p>Ты едешь по кругу. Задача — держать примерно одну и ту же маленькую скорость и плавно рулить, без рывков.</p>
+<p>Самое важное: <strong>смотри туда, куда хочешь ехать</strong>, а не на капот, не на свою правую руку и не на педали. Если смотреть под колёса, машина «плывёт» туда, куда ушёл взгляд, и круг становится корявым. Смотри на ту точку круга, к которой едешь, будто уже видишь свой путь на два-три корпуса впереди.</p>
+<p>Руль крути спокойно, двумя руками. Когда угол поворота большой, руки делают <strong>перехват</strong>: одна рука поворачивает, другая перехватывает обод в удобном месте и продолжает движение. Не скрещивай руки в замок «как будто борешься с рулём» и не отпускай руль совсем, чтобы он сам раскрутился. Если не понял перехват с первого раза — это нормально, инструктор покажет руками.</p>
+<p>Скорость держи маленькой и ровной. Если мотор просит помощи — чуть газа, без рывка. Если разогнался чуть больше, чем комфортно, спокойно притормози тем способом, который мы только что разобрали, или просто убери чуть газа. На круге не стыдно остановиться и тронуться заново.</p>
+<h3>Восьмёрка</h3>
+<div class="diagram-box">
+<svg viewBox="0 0 320 250" role="img" aria-label="Восьмёрка: два круга, взгляд на ту дугу, в которую въезжаешь">
+  <rect x="8" y="8" width="304" height="234" rx="16" fill="#EBF8FF" stroke="#90CDF4"/>
+  <path d="M160 80 C 160 40, 230 40, 230 90 C 230 140, 90 110, 90 160 C 90 210, 160 210, 160 170 C 160 130, 230 150, 230 90" fill="none" stroke="#2B6CB0" stroke-width="6"/>
+  <rect x="148" y="68" width="24" height="16" rx="3" fill="#1B365D"/>
+  <path d="M172 76 Q 210 70 226 100" fill="none" stroke="#C05621" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <polygon points="226,100 214,98 222,88" fill="#C05621"/>
+  <circle cx="232" cy="80" r="10" fill="#FFF7ED" stroke="#C05621" stroke-width="2"/>
+  <text x="232" y="84" text-anchor="middle" font-size="11" font-family="system-ui,sans-serif">👁</text>
+  <text x="160" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#1B365D" font-family="system-ui,sans-serif">Восьмёрка: смотри на следующую дугу</text>
+  <text x="160" y="218" text-anchor="middle" font-size="11" fill="#4A5568" font-family="system-ui,sans-serif">Сначала чуть выпрями руль,</text>
+  <text x="160" y="234" text-anchor="middle" font-size="11" fill="#4A5568" font-family="system-ui,sans-serif">потом плавно в другую сторону</text>
+</svg>
+<p class="cap">Восьмёрка не про скорость, а про плавность и взгляд. Если срезаешь край — почти всегда виноват взгляд у капота.</p>
+</div>
+<p>Восьмёрка — это как два круга, поставленные рядом, и ты рисуешь путь в виде цифры 8. В одном месте ты меняешь направление: был поворот, скажем, налево — и плавно переходишь в поворот направо, или наоборот.</p>
+<p>Здесь ещё важнее смотреть вперёд, уже на ту дугу, в которую сейчас въезжаешь. Руль сначала раскручиваешь обратно, почти к «прямо», и сразу плавно крутишь в другую сторону. Не торопись: восьмёрка не про скорость, а про плавность и взгляд.</p>
+<p>Если срезаешь внутренний край или уезжаешь слишком широко, почти всегда виноват не «руль тугой», а взгляд, который остался у капота. Подними глаза, и руки часто сами начинают работать ровнее.</p>
+<p>Глохнуть на восьмёрке тоже можно. Спокойно остановился, нейтраль, запуск, шаги трогания — и снова в путь.</p>
+<div class="qbox mini-q" id="mq7">
+  <h4>Проверь себя</h4>
+  <p>Куда смотреть на круге и восьмёрке?</p>
+  <div class="opts"><button type="button" data-ok="0">а) На капот</button><button type="button" data-ok="1">б) Туда, куда хочешь ехать, на несколько корпусов вперёд</button><button type="button" data-ok="0">в) На свои ноги</button></div>
+  <div class="feedback" data-explain="Взгляд ведёт машину. На педали со временем находишь ногами, не глядя."></div>
+</div>
+<aside class="callout tip"><span class="lbl">Совет инструктора</span>Куда смотришь — туда и едешь. На круге и восьмёрке взгляд держи на 2–3 корпуса вперёд по дуге, а не на капот и не на свои ноги.</aside>
+</div></details>
+<details class="block" open id="частые-ошибки-и-как-их-избежать"><summary>Частые ошибки и как их избежать</summary><div class="inner">
+<p><strong>Бросают сцепление.</strong> Педаль как будто выскальзывает, машина прыгает и глохнет. Лечится медленным движением и тремя секундами на точке схвата. Лучше «слишком медленно», чем «слишком резко».</p>
+<p><strong>Смотрят на педали или на капот.</strong> Тогда круг и восьмёрка разъезжаются, а тело сгибается. Педали через несколько попыток находятся уже ногами, без взгляда вниз. Глаза — в то место, куда едешь.</p>
+<p><strong>Газуют слишком рано или слишком сильно.</strong> В нашем методе газ появляется только после схвата и короткой паузы, и он мягкий. Если сразу топнуть газ, пока сцепление ещё в полу, мотор будет громко реветь на месте. Если топнуть в момент схвата — будет прыжок.</p>
+<p><strong>Забывают снять ручник.</strong> Машина едет тяжело или стоит и глохнет. Перед подъёмом сцепления — короткий взгляд: рычаг внизу, красная лампа погасла.</p>
+<p><strong>Путают педали правой ногой.</strong> На первых занятиях это бывает. Заранее поставь правую ногу на газ или на тормоз — не на две педали сразу.</p>
+<p><strong>Не дожимают сцепление до пола</strong>, когда включают передачу или когда останавливаются. Тогда передача входит плохо, а при остановке машина может заглохнуть. До пола — значит до пола, не «почти».</p>
+<p><strong>Сильно сжимают руль.</strong> Руки деревенеют, руль идёт рывками. Держи уверенно, но без борьбы. Плечи опусти, дыши.</p>
+<p><strong>Паника, если заглох мотор.</strong> Самая частая «ошибка в голове». Помни цепочку: сцепление, тормоз, нейтраль, запуск. Тихим голосом, по шагам.</p>
+</div></details>
+<details class="block" open id="запомни-главное"><summary>Запомни главное</summary><div class="inner">
+<ul><li>Левая нога — только сцепление, правая — только тормоз или газ, никогда оба сразу.</li><li>Сначала удобно сядь, пристегнись и настрой зеркала. Ехать «как получится» нельзя.</li><li>Красная лампа после запуска и снятия ручника — это серьёзно, скажи инструктору. Жёлтая — внимание. Зелёная и синяя — напоминание, что что-то включено.</li><li>Трогаемся так: сцепление в пол, первая, снять ручник, подвести сцепление до схвата <strong>без газа</strong>, подержать около трёх секунд, затем отпустить сцепление и мягко добавить газ.</li><li>Заглохла — это нормально: сцепление, тормоз, нейтраль, заведи снова.</li><li>На малой скорости останавливаемся, нажимая сцепление и тормоз вместе.</li><li>На круге и восьмёрке смотри туда, куда едешь, а не на капот.</li></ul>
+</div></details>
+<h2 id="quiz-h">Проверь себя</h2>
+<p>Выбери один ответ. Это не экзамен в ГАИ, а проверка, что главное зацепилось. После каждого вопроса сразу будет короткое пояснение, а в конце — общий счёт.</p>
+<div id="quiz">
+<div class="qbox quiz-q" data-n="1">
+  <h4>1. Какой ногой нажимают педаль сцепления?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Правой</button><button type="button" data-ok="1">б) Левой</button><button type="button" data-ok="0">в) Любой, как удобнее</button></div>
+  <div class="feedback" data-explain="Сцепление — единственная педаль для левой ноги. Правая работает только с тормозом и газом."></div>
+</div>
+<div class="qbox quiz-q" data-n="2">
+  <h4>2. Что такое «точка схвата»?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Момент, когда сцепление нажато до пола</button><button type="button" data-ok="1">б) Момент, когда машина чуть вздрагивает, обороты немного падают, и она может сама поползти</button><button type="button" data-ok="0">в) Момент, когда двигатель уже заглох</button></div>
+  <div class="feedback" data-explain="Это положение педали, в котором мотор только-только начинает крутить колёса. Именно его мы ловим и держим около трёх секунд."></div>
+</div>
+<div class="qbox quiz-q" data-n="3">
+  <h4>3. По нашему методу газ при трогании добавляют…</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Сразу, едва начиная отпускать сцепление с пола</button><button type="button" data-ok="0">б) До того, как снять ручник</button><button type="button" data-ok="1">в) После того как поймали схват, подержали около трёх секунд и начинаем отпускать сцепление до конца</button></div>
+  <div class="feedback" data-explain="Сначала учимся чувствовать сцепление без газа. Газ — мягко и позже."></div>
+</div>
+<div class="qbox quiz-q" data-n="4">
+  <h4>4. Машина заглохла. Что делать?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Сразу сильнее нажать газ, чтобы мотор «ожил»</button><button type="button" data-ok="1">б) Спокойно выжать сцепление, нажать тормоз, включить нейтраль и завести мотор снова</button><button type="button" data-ok="0">в) Выйти из машины и открыть капот</button></div>
+  <div class="feedback" data-explain="Без паники, по шагам. Газ сам по себе заглохший мотор не заведёт, а капот на первом занятии нам не нужен."></div>
+</div>
+<div class="qbox quiz-q" data-n="5">
+  <h4>5. Как останавливаться на малой скорости на площадке?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Только тормозом, сцепление не трогать</button><button type="button" data-ok="0">б) Только сцеплением, без тормоза</button><button type="button" data-ok="1">в) Нажать сцепление и тормоз вместе</button></div>
+  <div class="feedback" data-explain="Сцепление отделяет мотор от колёс, тормоз останавливает машину. Один только тормоз на первой передаче часто глушит мотор."></div>
+</div>
+<div class="qbox quiz-q" data-n="6">
+  <h4>6. Куда смотреть на круге и на восьмёрке?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) На капот и на край своей машины</button><button type="button" data-ok="1">б) Туда, куда хочешь ехать, на несколько корпусов вперёд по траектории</button><button type="button" data-ok="0">в) На свои ноги, чтобы не перепутать педали</button></div>
+  <div class="feedback" data-explain="Взгляд ведёт машину. На педали со временем находишь ногами, не глядя."></div>
+</div>
+<div class="qbox quiz-q" data-n="7">
+  <h4>7. За что отвечает левый подрулевой рычаг на Focus 2?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) За дворники и омыватель стекла</button><button type="button" data-ok="1">б) За указатели поворота, а также за дальний свет и «моргание» фарами</button><button type="button" data-ok="0">в) За включение печки и обогрев стекла</button></div>
+  <div class="feedback" data-explain="Дворники — это правый рычаг. Печка — крутилки в центре панели. Свет фар при этом обычно включают ещё и отдельной крутилкой слева на панели."></div>
+</div>
+<div class="qbox quiz-q" data-n="8">
+  <h4>8. На панели после запуска мотора осталась гореть красная лампа (ручник при этом уже снят). Что это значит?</h4>
+  <div class="opts"><button type="button" data-ok="0">а) Всё в порядке: красные лампы так и должны гореть во время езды</button><button type="button" data-ok="1">б) Это серьёзный сигнал, нужно остановиться и сразу сказать инструктору</button><button type="button" data-ok="0">в) Это просто подсветка панели, её можно не замечать</button></div>
+  <div class="feedback" data-explain="Красный цвет — «серьёзно». Часть ламп при самопроверке загорается до запуска и должна погаснуть. Если красная осталась гореть уже при работающем моторе и снятом ручнике — не продолжаем «на авось»."></div>
+</div>
+<div class="score" id="quiz-score"></div></div>
+<details class="block" open id="что-сделать-перед-занятием"><summary>Что сделать перед занятием</summary><div class="inner">
+<p>Ещё раз медленно проговори вслух четыре шага трогания и цепочку «заглохла — сцепление, тормоз, нейтраль, запуск». Остальное не зубри: на площадке инструктор всё покажет руками на настоящей машине. Ты уже не будешь слышать эти слова в первый раз — и этого достаточно, чтобы первое занятие прошло спокойнее.</p>
+<p>Увидимся на площадке. Получится.</p>
+</div></details>
+
+<details class="block" open id="istochniki-foto"><summary>Источники фото</summary>
+<div class="inner credits">
+<p>Все фотографии ниже — из Wikimedia Commons, с открытой лицензией. Мы использовали только европейский Focus Mk2 (2004–2011), не американский Focus 2008–2011: у него другой салон. Focus RS на двух кадрах — то же поколение; спортивные сиденья и шильдик отличаются от учебного 1.6, а крутилка света, рычаги и компоновка панели — те же.</p>
+<ul>
+<li><strong>Салон Titanium, 2005.</strong> Файл <a href="https://commons.wikimedia.org/wiki/File:Focus_II_Titanium_Interieur.jpg">Focus II Titanium Interieur.jpg</a>. Автор: Flob (Wikimedia Commons). Лицензия: <a href="https://creativecommons.org/licenses/by/2.5/">CC BY 2.5</a>.</li>
+<li><strong>Приборы, выключенные.</strong> Файл <a href="https://commons.wikimedia.org/wiki/File:Quadro_strumenti_ford_focus.jpg">Quadro strumenti ford focus.jpg</a>. Автор: Posotivoli. Focus 2 рестайлинг, 2009. Лицензия: <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</li>
+<li><strong>Приборы с горящими лампами.</strong> Файл <a href="https://commons.wikimedia.org/wiki/File:2008_Ford_Focus_Gauge_Illumination_(4256760661).jpg">2008 Ford Focus Gauge Illumination (4256760661).jpg</a>. Автор: Spanish Coches. Европейский кластер Focus 2, 2008. Лицензия: <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>.</li>
+<li><strong>Вид с места водителя и крутилка света.</strong> Файл <a href="https://commons.wikimedia.org/wiki/File:Dornbirn-Oberhuber_Concierge-Car_Show-Ford_RS-02ASD.jpg">Dornbirn-Oberhuber Concierge-Car Show-Ford RS-02ASD.jpg</a>. Автор: Asurnipal. Focus RS Mk2. Лицензия: <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</li>
+</ul>
+<p>Схемы передач, педалей, руля, точки схвата, круга и восьмёрки нарисованы для этого урока. Крупных открытых фото всех трёх педалей и 5-ступенчатой рукоятки учебной машины не нашлось — для них оставлены места под фото из машины инструктора.</p>
+</div>
+</details>
+
+<footer class="site">Урок 1 · учебный Ford Focus 2, 1.6, механика</footer>
+</div>
+<script>
+
+(function(){
+  const bar=document.getElementById("bar");
+  function progress(){
+    const h=document.documentElement;
+    const max=h.scrollHeight-h.clientHeight;
+    const p=max>0? (h.scrollTop||window.scrollY)/max : 0;
+    bar.style.width=(Math.min(1,Math.max(0,p))*100)+"%";
+  }
+  window.addEventListener("scroll", progress, {passive:true});
+  progress();
+
+  const STEPS=[
+    {n:"Шаг 1 из 4", t:"Сцепление в пол и первая передача", d:"Выжми сцепление до пола и включи первую. Рычаг уйдёт влево и вперёд (сверься со схемой). Он должен встать в гнездо, а не остаться болтаться в нейтрали."},
+    {n:"Шаг 2 из 4", t:"Сними ручник", d:"Чуть вверх, кнопка, вниз до конца. Красная лампа ручника гаснет. Правая нога может пока держаться на тормозе, затем тормоз отпускаешь."},
+    {n:"Шаг 3 из 4", t:"Подведи сцепление до схвата — без газа", d:"Плавно, не бросая, поднимай левую ногу, пока не почувствуешь точку схвата. Газ пока не трогай совсем. Кузов чуть вздрагивает, звук мотора становится чуть ниже и тяжелее."},
+    {n:"Шаг 4 из 4", t:"Подержи около 3 секунд, затем газ", d:"Поймай схват и подержи примерно три секунды: машина сама начнёт очень медленно ползти. Потом плавно отпусти сцепление до конца и мягко добавь газ."}
+  ];
+  const body=document.getElementById("step-body");
+  const prev=document.getElementById("step-prev");
+  const next=document.getElementById("step-next");
+  const dots=[...document.querySelectorAll("#stepper .step-dots i")];
+  let step=0;
+  function renderStep(){
+    const s=STEPS[step];
+    body.innerHTML='<div class="step-num">'+s.n+'</div><h3 style="margin:.2rem 0 .4rem">'+s.t+'</h3><p style="margin:0">'+s.d+'</p>';
+    dots.forEach((d,i)=>d.classList.toggle("on", i<=step));
+    prev.disabled=step===0;
+    next.textContent=step===STEPS.length-1?"Сначала":"Дальше";
+  }
+  if(body){
+    prev.addEventListener("click",()=>{if(step>0){step--;renderStep();}});
+    next.addEventListener("click",()=>{step=step===STEPS.length-1?0:step+1;renderStep();});
+    renderStep();
+  }
+
+  const LAMPS_DATA=[
+    {id:"oil", name:"Маслёнка", color:"red", title:"Давление масла", text:"Красный. Давление масла упало, мотор может быстро пострадать. Остановись, выжми сцепление, затормози, заглуши, скажи инструктору. Дальше не едем «на минуточку»."},
+    {id:"batt", name:"Аккумулятор", color:"red", title:"Зарядка", text:"Красный. Генератор не заряжает батарею. Скажи инструктору. Оставлять «на потом» нельзя: может сесть электрика."},
+    {id:"brake", name:"Тормоза / P", color:"red", title:"Ручник или тормоза", text:"Красный. Если ручник поднят — так и должно гореть. Если уже снят, а лампа горит (тем более вместе с ABS) — не едем, зовём инструктора."},
+    {id:"airbag", name:"Подушка", color:"red", title:"Подушка безопасности", text:"Красный. Система подушек неисправна или не готова. Решение на площадке принимает инструктор, но это неисправность, её нельзя «подождать»."},
+    {id:"belt", name:"Ремень", color:"red", title:"Ремень безопасности", text:"Красный. Обычно просто не пристёгнут — пристегнись. Если ремень защёлкнут, а лампа всё равно горит — скажи инструктору."},
+    {id:"temp", name:"Термометр", color:"red", title:"Перегрев", text:"Красный. Мотор слишком горячий. Останавливаемся, глушим, как скажет инструктор. Крышку горячего радиатора сразу не открываем."},
+    {id:"door", name:"Дверь", color:"red", title:"Открыта дверь", text:"Красный (если есть на панели). Проверь двери, иногда багажник или капот. На ходу с открытой дверью не едем."},
+    {id:"eng", name:"Check Engine", color:"yellow", title:"Проверьте двигатель", text:"Жёлтый. Электроника заметила неисправность. Горит ровно, мотор работает ровно — скажи инструктору, не паникуй. Если лампа мигает, а мотор троит — не газуем сильно и сразу говорим инструктору."},
+    {id:"abs", name:"ABS", color:"yellow", title:"Антиблокировка", text:"Жёлтый. Система ABS неисправна. Обычные тормоза чаще всего работают, но на скользком колесо может пойти юзом. Скажи инструктору."},
+    {id:"esp", name:"ESP", color:"yellow", title:"Стабилизация", text:"Жёлтый, если есть. Коротко мигнула на скользком — штатно. Горит постоянно — скажи инструктору. На первом занятии ESP не выключаем."},
+    {id:"fuel", name:"Топливо", color:"yellow", title:"Мало топлива", text:"Жёлтый. Пора заправляться. Скажи инструктору."},
+    {id:"rfog", name:"Задняя ПТФ", color:"yellow", title:"Задняя противотуманка", text:"Жёлтый. Это не поломка, а индикатор: ты её включил. Днём её не держат включённой «на всякий случай»: слепит тех, кто сзади."},
+    {id:"turn", name:"Поворотники", color:"green", title:"Указатели поворота", text:"Зелёный. Мигают вместе с «тиканьем», когда включён поворот или аварийка. Если стрелка моргает после поворота — выключи рычаг."},
+    {id:"beam", name:"Ближний", color:"green", title:"Ближний / габариты", text:"Зелёный (на части панелей). Напоминание, что свет включён."},
+    {id:"ffog", name:"Передние ПТФ", color:"green", title:"Передние противотуманки", text:"Зелёный. Просто индикатор включения."},
+    {id:"high", name:"Дальний", color:"blue", title:"Дальний свет", text:"Синий. Дальний включён. Если загорелся случайно — выключи левым рычагом."}
+  ];
+  const iconSvg={
+    red:(p)=>'<svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="#FED7D7" stroke="#9B2C2C" stroke-width="2"/><text x="18" y="22" text-anchor="middle" font-size="11" font-weight="800" fill="#9B2C2C" font-family="system-ui,sans-serif">'+p+'</text></svg>',
+    yellow:(p)=>'<svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="#FEFCBF" stroke="#975A16" stroke-width="2"/><text x="18" y="22" text-anchor="middle" font-size="11" font-weight="800" fill="#975A16" font-family="system-ui,sans-serif">'+p+'</text></svg>',
+    green:(p)=>'<svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="#C6F6D5" stroke="#276749" stroke-width="2"/><text x="18" y="22" text-anchor="middle" font-size="11" font-weight="800" fill="#276749" font-family="system-ui,sans-serif">'+p+'</text></svg>',
+    blue:(p)=>'<svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="#BEE3F8" stroke="#2A4365" stroke-width="2"/><text x="18" y="22" text-anchor="middle" font-size="11" font-weight="800" fill="#2A4365" font-family="system-ui,sans-serif">'+p+'</text></svg>'
+  };
+  const short={oil:"💧",batt:"+/−",brake:"!",airbag:"◉",belt:"⛨",temp:"°C",door:"▭",eng:"ENG",abs:"ABS",esp:"ESP",fuel:"⛽",rfog:"ПТФ",turn:"⇦",beam:"💡",ffog:"≈",high:"⇔"};
+  const wrap=document.getElementById("lamps");
+  const panel=document.getElementById("lamp-panel");
+  if(wrap){
+    wrap.innerHTML=LAMPS_DATA.map(L=>'<button type="button" class="lamp" data-id="'+L.id+'" aria-pressed="false">'+iconSvg[L.color](short[L.id]||"!")+'<span class="nm">'+L.name+'</span></button>').join("");
+    wrap.addEventListener("click",e=>{
+      const btn=e.target.closest(".lamp"); if(!btn) return;
+      const L=LAMPS_DATA.find(x=>x.id===btn.dataset.id);
+      wrap.querySelectorAll(".lamp").forEach(b=>b.setAttribute("aria-pressed", b===btn?"true":"false"));
+      panel.className="lamp-panel show";
+      panel.innerHTML='<span class="pill '+L.color+'">'+({red:"Красный",yellow:"Жёлтый",green:"Зелёный",blue:"Синий"}[L.color])+'</span><strong style="display:block;margin:.2rem 0">'+L.title+'</strong><p style="margin:.2rem 0 0">'+L.text+'</p>';
+      panel.scrollIntoView({block:"nearest", behavior:"instant"});
+    });
+  }
+
+  function bindChoices(root, onDone){
+    root.querySelectorAll(".qbox").forEach(box=>{
+      const opts=box.querySelectorAll(".opts button");
+      const fb=box.querySelector(".feedback");
+      opts.forEach(btn=>{
+        btn.addEventListener("click",()=>{
+          if(box.dataset.done) return;
+          box.dataset.done="1";
+          const ok=btn.dataset.ok==="1";
+          btn.classList.add(ok?"correct":"wrong");
+          opts.forEach(o=>{
+            o.disabled=true;
+            if(o.dataset.ok==="1") o.classList.add("correct");
+          });
+          fb.className="feedback show "+(ok?"ok":"bad");
+          fb.textContent=(ok?"Верно. ":"Не совсем. ")+(fb.dataset.explain||"");
+          if(onDone) onDone(ok);
+        });
+      });
+    });
+  }
+  bindChoices(document, null);
+
+  const quiz=document.getElementById("quiz");
+  if(quiz){
+    let answered=0, score=0, total=quiz.querySelectorAll(".quiz-q").length;
+    quiz.querySelectorAll(".quiz-q .opts button").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        const box=btn.closest(".quiz-q");
+        if(box.dataset.scored) return;
+        box.dataset.scored="1";
+        answered++;
+        if(btn.dataset.ok==="1") score++;
+        if(answered===total){
+          const el=document.getElementById("quiz-score");
+          const word=score>=7?"Отлично":score>=5?"Хорошо, перечитай слабые места":"Пройди вопросы ещё раз — это нормально";
+          el.className="score show";
+          el.innerHTML="Твой результат<b>"+score+" из "+total+"</b>"+word;
+          el.scrollIntoView({behavior:"smooth",block:"center"});
+        }
+      }, true);
+    });
+  }
+})();
+
+</script>
+</body>
+</html>
